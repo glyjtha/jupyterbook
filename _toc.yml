@@ -20,3 +20,7 @@ parts:
         title: "Cluster Usage"
       - file: content/HPC/request
         title: "Job Request"
+      - file: content/HPC/r
+        title: "R Package"
+      - file: content/HPC/rstudioserver
+        title: "RStudio Server"

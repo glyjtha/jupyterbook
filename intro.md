@@ -18,23 +18,3 @@ This handbook collects all of our commonly used pipelines, cheat‑sheets, and g
 1. **Browse the sidebar** or the Contents below to jump to a section.  
 2. Each page is a standalone guide—feel free to print or view it on your laptop when you’re on the bench.  
 3. Want to contribute? Fork this repository, add your `.md` under `content/`, then send us a pull‑request!
-
-```{toctree}
-:maxdepth: 2
-:caption: Contents
-
-10x_analysis/Cell_Ranger_ATAC
-10x_analysis/Cell Ranger_Singel_Cell
-10x_analysis/Single_Cell_Cluster_Seurat
-
-HPC/Set_up_R_on_HPC
-HPC/Set_up_RStudio_on_HPC
-
-demulti
-NGS_indel_analysis
-PIPseq
-SampleSheet_MiSeq
-File_Storage_System
-Shareseq_alignment_and_analysis
-STAR_Alignment
-Transfer_data_from_Scripps_Genomic_Core

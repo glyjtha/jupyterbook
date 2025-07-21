@@ -1,0 +1,22 @@
+# mynewbook/_toc.yml
+format: jb-book
+root: intro
+
+parts:
+  - caption: "10x Analysis"
+    chapters:
+      - file: content/10x_analysis/cellranger_atac
+        title: "Cell Ranger ATAC"
+      - file: content/10x_analysis/cellranger_singlecell
+        title: "Cell Ranger single-cell"
+      - file: content/10x_analysis/single_cell_cluster_seurat
+        title: "Seurat clustering"
+
+  - caption: "HPC Guides"
+    chapters:
+      - file: content/HPC/introduction
+        title: "HPC Introduction"
+      - file: content/HPC/cluster
+        title: "Cluster Usage"
+      - file: content/HPC/request
+        title: "Job Request"

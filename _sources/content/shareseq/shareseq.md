@@ -2,14 +2,14 @@
 
 *Shareseq package is already installed on Scripps HPC by JC*
 
-# BEFORE YOU START
+### BEFORE YOU START
 - Install XQuartz (windows please use [Xming:](https://sourceforge.net/projects/xming/))
 - Use ssh -Y xinjin@login00.scripps.edu 
 
-# IMPORTANT:
+### IMPORTANT:
 - module load python/2.7.11 # do not use other version of python! Low yaml version number
 
-# DATA UPDATE:
+### DATA UPDATE:
 - Update the YMAL from dropbox
 - Update .sh from dropbox
 - Identify the Illumina seq run folder and make sure the permission is correct – if not just copy to a new address for analysis permission
@@ -23,7 +23,7 @@ rsync xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/220517/testagain.f
 ```
 
 
-# Post analysis:
+### Post analysis:
 ```bash
 cp *.pdf /gpfs/group/jin/xin/shareseq/220920shareseqtest/
 cp *.txt /gpfs/group/jin/xin/shareseq/220920shareseqtest/
@@ -31,12 +31,12 @@ cp *counts.csv* /gpfs/group/jin/xin/shareseq/220920shareseqtest/
 cp *RefSeqTSS* /gpfs/group/jin/xin/shareseq/220920shareseqtest/
 ```
 
-# KAUSHIK 
+#### KAUSHIK 
 ```bash
 python/2.7.11
 ```
 
-# Install Conda Environment
+### Install Conda Environment
 ```bash
 cd /gpfs/home/xinjin/
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -49,7 +49,7 @@ Type python2 -> yaml is 5.4.1 check
 module purge
 ```
 
-# Setup for umi_tools 0.5.5 (already installed by JC)
+### Setup for umi_tools 0.5.5 (already installed by JC)
 ```bash
 source ~/.bashrc
 conda create --name py2711 python=2.7
@@ -58,7 +58,7 @@ python --version  // confirm version
 conda install umi_tools==0.5.5 ## need sudo to do
 ```
 
-# Install Higher Version Subread
+### Install Higher Version Subread
 ```bash
 wget https://sourceforge.net/projects/subread/files/subread-2.0.3/subread-2.0.3-source.tar.gz
 tar -xvf xxx
@@ -66,36 +66,36 @@ cd folder/src
 make -f Makefile.Linux
 ```
 
-# Use
+### Use
 ```bash
 ~/subread-2.0.3-source/bin/featureCounts 
 ~/seqtk/seqtk
 ```
 
-# Run The Script
+### Run The Script
 - Re start the terminal
 ```bash
 srun --x11 --pty bash -i 
 bash shareseq.sh 
 ```
 
-# Download Files
+### Download Files
 ```bash
 rsync -r xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/220517/output/sp.rna/downloadrna ./
 rsync -a ./starindexing.sh xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/
 ```
 
-# How to use tmux:
+### How to use tmux:
 ```bash
 tmux
 Control b, then d (to leave)
 tmux attach (is to attach back the screen)
 ```
 
-# Install `mosh` for Stable SSH
+### Install `mosh` for Stable SSH
 [mosh](https://mosh.org/#getting)
 
-# INSTALL CONDA ENV (Python 2.7)
+### INSTALL CONDA ENV (Python 2.7)
 ```bash
 module load miniconda
 conda create --name xinenv python=2.7.11
@@ -121,30 +121,30 @@ pip install umi_tools==0.5.5 //only this version is fine w python2
 ```
 - Environment location: `/gpfs/home/xinjin/.conda/envs/xinenv`
 
-# Edit `.bashrc`:
+### Edit `.bashrc`:
 ```bash
 nano ~/.bashrc
 ```
 
-# Add:
+### Add:
 ```bash
 #module load miniconda
 #source activate xinenv
 export PYTHONPATH=’/gpfs/group/home/xinjin/.conda/envs/xinenv/lib/python2.7/site-packages’
 ```
-# Rsync Example Script
+### Rsync Example Script
 ```bash
 Rsync -a /Users/xinjin/Dropbox\ \(Scripps\ Research\)/Jin\ Lab\ Internal/Xin/scripts/220531shareseq_test/Split_seq_example.sh xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/test/
 
 chmod +x shareseq.sh      # make it executable
 ```
 
-# Manual Demultiplexing
+### Manual Demultiplexing
 ```bash
 bcl2fastq -p 12 --barcode-mismatches 1 --output-dir ./fastqs --no-lane-splitting --mask-short-adapter-reads 0 --create-fastq-for-index-reads  2>>./Run.log
 ```
 
-# Example Read Count Using grep
+### Example Read Count Using grep
 ```bash
 grep "​​GCAGCTTTCCGGGCGATGCCA" Bcl11b_S1_R1_001.fastq.gz | wc -l
 ```

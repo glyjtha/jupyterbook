@@ -24,3 +24,9 @@ parts:
         title: "R Package"
       - file: content/HPC/rstudioserver
         title: "RStudio Server"
+
+  - caption: "RNA Scope Analysis"
+    chapters:
+      - file: content/RNA_Scope_analysis/rna_scope
+        title: "RNA Scope Analysis"
+      

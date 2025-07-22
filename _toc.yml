@@ -46,3 +46,23 @@ parts:
     chapters:
       - file: content/download/download
         title: "Kriegstein Data Download Guide"
+
+  - caption: "ATAC-seq"
+    chapters:
+      - file: content/atac/atac
+        title: "ATAC-seq Analysis Guides"
+  
+  - caption: "Cut and Run"
+    chapters:
+      - file: content/c_and_r/cr
+        title: "C & R Analysis Guide"
+
+  - caption: "Demultiplexing"
+    chapters:
+      - file: content/demultiplexing/demulti
+        title: "Demultiplexing Script"
+  
+  - caption: "File Storage System"
+    chapters:
+      - file: content/storage/storage
+        title: "File Storage Systems Guide"

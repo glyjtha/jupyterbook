@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Scripps Research File Storage Systems Guide &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/storage/file_storage';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NGS Indel Analysis Guideline" href="../ngs/ngs_indel.html" />
+    <link rel="prev" title="Demultiplexing Script (demulti.sh)" href="../demultiplexing/demulti.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jin Lab Dry Lab Handbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">10x Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_atac.html">Cell Ranger ATAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_singlecell.html">Cell Ranger single-cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/single_cell_cluster_seurat.html">Seurat clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cheatsheet.html">10x Analysis Cheatsheet</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HPC Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/introduction.html">HPC Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/cluster.html">Cluster Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/request.html">Job Request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/r.html">R Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/rstudioserver.html">RStudio Server</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNA Scope Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RNA_Scope_analysis/rna_scope.html">RNA Scope Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basespace Run Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../base_run/base_run.html">Basespace Run Creation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BD Rhapsody Pipeline Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../BD/bd.html">BD Rhapsody Pipeline Setup</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public Dataset Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../download/download.html">Kriegstein Data Download Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ATAC-seq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../atac/atac.html">ATAC-seq Analysis Guides</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cut and Run</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../c_and_r/cr.html">C &amp; R Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Demultiplexing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../demultiplexing/demulti.html">Demultiplexing Script</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Storage System</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">File Storage Systems Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NGS Indel </span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ngs/ngs_indel.html">NGS Indel Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipseq/pipseq.html">Pipseq Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Shareseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../shareseq/shareseq.html">Shareseq Alignment &amp; Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STAR Alignment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../star_alignment/star.html">STAR Alignment Guideline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/storage/file_storage.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/storage/file_storage.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Scripps Research File Storage Systems Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-use-file-systems">Daily Use File Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropbox">Dropbox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-resources">Broad Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vpn-access">VPN Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-access">SSH Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#file-systems">File Systems</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-garibaldi">HPC (Garibaldi)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer-commands">Data Transfer Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scp-examples">SCP Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wget-example">wget Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rsync-examples">rsync Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sftp-example">SFTP Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#screen-commands">Screen Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-transfer-with-password">Automated Transfer with Password</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-cloud-storage">Google Cloud Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-transfer">Setup and Transfer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archival-file-systems">Archival File Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stornext">StorNext</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-storage">Object Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cyberduck-access">CyberDuck Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-access">HPC Access</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-data-access">Broad Data Access</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="scripps-research-file-storage-systems-guide">
+<h1>Scripps Research File Storage Systems Guide<a class="headerlink" href="#scripps-research-file-storage-systems-guide" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>File storage systems made available by Scripps Research fall into categories–daily use file systems and archival file systems. Daily use file systems can be used to store active projects and any past data, analyses, or manuscripts. Archival file systems are used to store raw data ONLY, such as unprocessed images or genomic data. The available archival file systems are StorNext and object storage.</p>
+</section>
+<section id="daily-use-file-systems">
+<h2>Daily Use File Systems<a class="headerlink" href="#daily-use-file-systems" title="Link to this heading">#</a></h2>
+<section id="dropbox">
+<h3>Dropbox<a class="headerlink" href="#dropbox" title="Link to this heading">#</a></h3>
+<p>Dropbox should be the main location where all files should be stored. Dropbox syncs all folders automatically, but users can manually select which folders get synced. All members receive unlimited storage through Scripps.</p>
+</section>
+<section id="broad-resources">
+<h3>Broad Resources<a class="headerlink" href="#broad-resources" title="Link to this heading">#</a></h3>
+<section id="vpn-access">
+<h4>VPN Access<a class="headerlink" href="#vpn-access" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>URL</strong>: <a class="reference external" href="https://intranet.broadinstitute.org/bits/service-catalog/networking/vpn">https://intranet.broadinstitute.org/bits/service-catalog/networking/vpn</a></p></li>
+<li><p><strong>Login</strong>: Use Broad email login</p></li>
+</ul>
+</section>
+<section id="ssh-access">
+<h4>SSH Access<a class="headerlink" href="#ssh-access" title="Link to this heading">#</a></h4>
+<ul>
+<li><p><strong>URL</strong>: <a class="reference external" href="https://intranet.broadinstitute.org/bits/service-catalog/scientific-computing/login-servers">https://intranet.broadinstitute.org/bits/service-catalog/scientific-computing/login-servers</a></p></li>
+<li><p><strong>Command</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>xinjin@login.broadinstitute.org
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="file-systems">
+<h4>File Systems<a class="headerlink" href="#file-systems" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Documentation</strong>: <a class="reference external" href="https://intranet.broadinstitute.org/bits/service-catalog/compute-resources/file-systems">https://intranet.broadinstitute.org/bits/service-catalog/compute-resources/file-systems</a></p></li>
+<li><p><strong>Folder Destination</strong>: <code class="docutils literal notranslate"><span class="pre">/stanley/levin/jinlab</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="hpc-garibaldi">
+<h3>HPC (Garibaldi)<a class="headerlink" href="#hpc-garibaldi" title="Link to this heading">#</a></h3>
+<p>The HPC file system should be used for any data being analyzed using the high performance clusters. The file system can be accessed through SSH after obtaining a HPC account (email <a class="reference external" href="mailto:hpc&#37;&#52;&#48;scripps&#46;edu">hpc<span>&#64;</span>scripps<span>&#46;</span>edu</a> to create one).</p>
+<p><strong>Alternative Access</strong>: Use Cyberduck (SFTP, <a class="reference external" href="http://login00.scripps.edu">login00.scripps.edu</a>, Scripps username/password) to access from your own device.</p>
+<p><strong>Storage Locations</strong>:</p>
+<ul class="simple">
+<li><p>User folder: <code class="docutils literal notranslate"><span class="pre">~/</span></code></p></li>
+<li><p>Group folder: <code class="docutils literal notranslate"><span class="pre">/gpfs/group/jin</span></code></p></li>
+</ul>
+<p><strong>Note</strong>: Although there is no quota on our storage, the storage is shared across Scripps, so maintain only what is absolutely necessary on the clusters.</p>
+</section>
+</section>
+<section id="data-transfer-commands">
+<h2>Data Transfer Commands<a class="headerlink" href="#data-transfer-commands" title="Link to this heading">#</a></h2>
+<section id="scp-examples">
+<h3>SCP Examples<a class="headerlink" href="#scp-examples" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From Broad to local</span>
+scp<span class="w"> </span>-r<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>xinjin@xfer.broadinstitute.org:/broad/zhanglabdata/Xin/10x/DATA/septum<span class="w"> </span>./
+
+<span class="c1"># From Scripps to local (not working)</span>
+scp<span class="w"> </span>-r<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>xinjin@login01.scripps.edu:/gpfs/group/jin/Xinhe/10Xanalysis/240627_378RNA/240724count_3/outs/web_summary.html<span class="w"> </span>./
+</pre></div>
+</div>
+</section>
+<section id="wget-example">
+<h3>wget Example<a class="headerlink" href="#wget-example" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-r<span class="w"> </span>--mirror<span class="w"> </span>--user<span class="o">=</span>xjin<span class="w"> </span>--password<span class="o">=</span><span class="s1">&#39;3isPUpHAphi7&#39;</span><span class="w"> </span>ftp://igm-storage2.ucsd.edu/220927_M04586_0757_000000000-DHFVT/
+</pre></div>
+</div>
+</section>
+<section id="rsync-examples">
+<h3>rsync Examples<a class="headerlink" href="#rsync-examples" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Broad to Scripps</span>
+rsync<span class="w"> </span>-r<span class="w"> </span>-v<span class="w"> </span>ssh<span class="w"> </span>xinjin@xfer.broadinstitute.org:~/broad/zhanglabdata/Xin<span class="w"> </span>/gpfs/group/jin/broad_xin/
+
+<span class="c1"># Scripps to Broad</span>
+rsync<span class="w"> </span>-av<span class="w"> </span>-P<span class="w"> </span>/gpfs/group/jin/Xinhe/10Xanalysis/240627_378RNA/240724count_3/outs/web_summary.html<span class="w"> </span>xinjin@xfer.broadinstitute.org:/stanley/levin/jinlab
+
+<span class="c1"># From Scripps</span>
+rsync<span class="w"> </span>-r<span class="w"> </span>-v<span class="w"> </span>ssh<span class="w"> </span>xinjin@login02.scripps.edu:/gpfs/group/jin/Xinhe/10Xanalysis/240627_378RNA/240724count_3/outs/web_summary.html
+
+<span class="c1"># With SSH key</span>
+rsync<span class="w"> </span>-r<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;ssh -i ~/.ssh/id_rsa&quot;</span><span class="w"> </span>xinjin@xfer.broadinstitute.org:/broad/zhanglabdata/Xin<span class="w"> </span>/gpfs/group/jin/broad_xin
+</pre></div>
+</div>
+</section>
+<section id="sftp-example">
+<h3>SFTP Example<a class="headerlink" href="#sftp-example" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sftp<span class="w"> </span>xinjin@xfer.broadinstitute.org
+get<span class="w"> </span>/broad/zhanglabdata/Xin
+</pre></div>
+</div>
+</section>
+<section id="screen-commands">
+<h3>Screen Commands<a class="headerlink" href="#screen-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>screen<span class="w"> </span>-S<span class="w"> </span>name<span class="w">     </span><span class="c1"># start</span>
+screen<span class="w"> </span>-r<span class="w"> </span>name<span class="w">     </span><span class="c1"># reattach</span>
+screen<span class="w"> </span>-d<span class="w">          </span><span class="c1"># detach earlier screen</span>
+</pre></div>
+</div>
+</section>
+<section id="automated-transfer-with-password">
+<h3>Automated Transfer with Password<a class="headerlink" href="#automated-transfer-with-password" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sshpass<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;kristinalajolla2021!&quot;</span><span class="w"> </span>scp<span class="w"> </span>-r<span class="w"> </span>xinjin@xfer.broadinstitute.org:/broad/zhanglabdata/Xin/10x/DATA/septum<span class="w"> </span>./
+</pre></div>
+</div>
+</section>
+</section>
+<section id="google-cloud-storage">
+<h2>Google Cloud Storage<a class="headerlink" href="#google-cloud-storage" title="Link to this heading">#</a></h2>
+<section id="setup-and-transfer">
+<h3>Setup and Transfer<a class="headerlink" href="#setup-and-transfer" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up account</span>
+gcloud<span class="w"> </span>auth<span class="w"> </span>login
+
+<span class="c1"># Copy data</span>
+gsutil<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>gs://fc-f59d69ee-f0ea-4c55-bc8b-9685385d9859/191217septum_mm10v300<span class="w"> </span>./
+gsutil<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>gs://fc-f59d69ee-f0ea-4c55-bc8b-9685385d9859/201007_sepP5_mm10v300<span class="w"> </span>./
+gsutil<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>gs://fc-f59d69ee-f0ea-4c55-bc8b-9685385d9859/191218fourcore_mm10v300<span class="w"> </span>./
+gsutil<span class="w"> </span>cp<span class="w"> </span>-r<span class="w"> </span>gs://fc-f59d69ee-f0ea-4c55-bc8b-9685385d9859/200125_PS_sep_mm10v300<span class="w"> </span>./
+
+<span class="c1"># Reference data</span>
+gsutil<span class="w"> </span>cp<span class="w"> </span>gs://regev-lab/resources/cellranger/refdata-cellranger-GRCh38-3.0.0.tar.gz<span class="w"> </span>./
+</pre></div>
+</div>
+</section>
+</section>
+<section id="archival-file-systems">
+<h2>Archival File Systems<a class="headerlink" href="#archival-file-systems" title="Link to this heading">#</a></h2>
+<p>Archival file systems can be accessed through CyberDuck on Mac or PC (<a class="reference external" href="https://cyberduck.io">https://cyberduck.io</a>) or through the HPC.</p>
+<section id="stornext">
+<h3>StorNext<a class="headerlink" href="#stornext" title="Link to this heading">#</a></h3>
+<p><strong>HPC Access</strong>: Files can be moved from the HPC through the directory <code class="docutils literal notranslate"><span class="pre">/stornext/snfs1/disk/jin</span></code>. You must login through <code class="docutils literal notranslate"><span class="pre">login03.scripps.edu</span></code> to see the StorNext files.</p>
+<p><strong>CyberDuck Access</strong>: StorNext can be accessed through CyberDuck similarly by connecting to <code class="docutils literal notranslate"><span class="pre">login03.scripps.edu</span></code>.</p>
+<p><strong>Microscopy Computer Access</strong>: StorNext can be mounted onto the microscopy computers by connecting to <code class="docutils literal notranslate"><span class="pre">\\snfs.scripps.edu\jin</span></code></p>
+</section>
+<section id="object-storage">
+<h3>Object Storage<a class="headerlink" href="#object-storage" title="Link to this heading">#</a></h3>
+<section id="cyberduck-access">
+<h4>CyberDuck Access<a class="headerlink" href="#cyberduck-access" title="Link to this heading">#</a></h4>
+<p>To access object storage through CyberDuck, add/open a connection with:</p>
+<ul class="simple">
+<li><p><strong>Type</strong>: Amazon S3</p></li>
+<li><p><strong>Access</strong>: <code class="docutils literal notranslate"><span class="pre">6cb1bf1d6e5d472c895b92ff59d6c838</span></code></p></li>
+<li><p><strong>Secret</strong>: <code class="docutils literal notranslate"><span class="pre">aaad7af6bda54277adb07aa747986355</span></code></p></li>
+</ul>
+</section>
+<section id="hpc-access">
+<h4>HPC Access<a class="headerlink" href="#hpc-access" title="Link to this heading">#</a></h4>
+<p>To access object storage through HPC, use the <code class="docutils literal notranslate"><span class="pre">rclone</span></code> command with the directory <code class="docutils literal notranslate"><span class="pre">Jin</span></code></p>
+</section>
+</section>
+</section>
+<section id="broad-data-access">
+<h2>Broad Data Access<a class="headerlink" href="#broad-data-access" title="Link to this heading">#</a></h2>
+<p>Files are stored on <code class="docutils literal notranslate"><span class="pre">datashare.scripps.edu</span></code> (access through CyberDuck or Putty)</p>
+<p><strong>Credentials</strong>:</p>
+<ul class="simple">
+<li><p><strong>Username</strong>: <code class="docutils literal notranslate"><span class="pre">xinjin</span></code></p></li>
+<li><p><strong>Password</strong>: <code class="docutils literal notranslate"><span class="pre">P&#64;ss4Broad!</span></code></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/storage"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../demultiplexing/demulti.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Demultiplexing Script (demulti.sh)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ngs/ngs_indel.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">NGS Indel Analysis Guideline</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daily-use-file-systems">Daily Use File Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropbox">Dropbox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-resources">Broad Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vpn-access">VPN Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-access">SSH Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#file-systems">File Systems</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-garibaldi">HPC (Garibaldi)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer-commands">Data Transfer Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scp-examples">SCP Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wget-example">wget Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rsync-examples">rsync Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sftp-example">SFTP Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#screen-commands">Screen Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-transfer-with-password">Automated Transfer with Password</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-cloud-storage">Google Cloud Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-transfer">Setup and Transfer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archival-file-systems">Archival File Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stornext">StorNext</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-storage">Object Storage</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cyberduck-access">CyberDuck Access</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hpc-access">HPC Access</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broad-data-access">Broad Data Access</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

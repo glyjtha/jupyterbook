@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>STAR Alignment Guide &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/star_alignment/star';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Shareseq Pipeline Guide (Scripps HPC)" href="../shareseq/shareseq.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jin Lab Dry Lab Handbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">10x Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_atac.html">Cell Ranger ATAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_singlecell.html">Cell Ranger single-cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/single_cell_cluster_seurat.html">Seurat clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cheatsheet.html">10x Analysis Cheatsheet</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HPC Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/introduction.html">HPC Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/cluster.html">Cluster Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/request.html">Job Request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/r.html">R Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/rstudioserver.html">RStudio Server</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNA Scope Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RNA_Scope_analysis/rna_scope.html">RNA Scope Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basespace Run Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../base_run/base_run.html">Basespace Run Creation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BD Rhapsody Pipeline Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../BD/bd.html">BD Rhapsody Pipeline Setup</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public Dataset Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../download/download.html">Kriegstein Data Download Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ATAC-seq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../atac/atac.html">ATAC-seq Analysis Guides</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cut and Run</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../c_and_r/cr.html">C &amp; R Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Demultiplexing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../demultiplexing/demulti.html">Demultiplexing Script</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Storage System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../storage/file_storage.html">File Storage Systems Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NGS Indel </span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ngs/ngs_indel.html">NGS Indel Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipseq/pipseq.html">Pipseq Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Shareseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../shareseq/shareseq.html">Shareseq Alignment &amp; Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STAR Alignment</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">STAR Alignment Guideline</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/star_alignment/star.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/star_alignment/star.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>STAR Alignment Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-bulk-sequencing-data">Aligning Bulk Sequencing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-single-cell-sequencing-data">Aligning Single Cell Sequencing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downstream-analyses">Downstream Analyses</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="star-alignment-guide">
+<h1>STAR Alignment Guide<a class="headerlink" href="#star-alignment-guide" title="Link to this heading">#</a></h1>
+<p>For an introduction to using the high performance clusters, look {HPC Introduction}<code class="docutils literal notranslate"><span class="pre">../HPC/introduction.md</span></code></p>
+<p>To perform an RNA-seq alignment using the STAR algorithm, you need the following:</p>
+<ol class="arabic simple">
+<li><p>Sequencing data (.fastq)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Produced by sequencer</p></li>
+<li><p>ASTQ files contain the sequences frome each read and quality scores estimating the confidence of each base</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Genome index</p></li>
+</ol>
+<ul class="simple">
+<li><p>Generated from reference genome</p></li>
+<li><p>Genome sequences against which sequencing reads are aligned with indexes generated by STAR algorithm</p></li>
+</ul>
+<p>For more information, manual is here.</p>
+<p>A good introductory reading: <a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon/lessons/03_QC_STAR_and_Qualimap_run.html">Link</a></p>
+<section id="aligning-bulk-sequencing-data">
+<h2>Aligning Bulk Sequencing Data<a class="headerlink" href="#aligning-bulk-sequencing-data" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/dir/to/fastq/files
+/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--genomeLoad<span class="w"> </span>LoadAndExit<span class="w"> </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10
+
+mkdir<span class="w"> </span>outs
+
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*R1*.fastq<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/_R1.*//g&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span>mkdir<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+<span class="w">    </span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10<span class="w">  </span><span class="se">\</span>
+<span class="w">    </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10/refdata-gex-mm10-2020-A/genes/genes.gtf<span class="se">\</span>
+<span class="w">    </span>--readFilesIn<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R2_001.fastq<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R1_001.fastq<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--readFilesCommand<span class="w"> </span>zcat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--quantMode<span class="w"> </span>GeneCounts<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--outFileNamePrefix<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--genomeLoad<span class="w"> </span>Remove<span class="w"> </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10
+</pre></div>
+</div>
+</section>
+<section id="aligning-single-cell-sequencing-data">
+<h2>Aligning Single Cell Sequencing Data<a class="headerlink" href="#aligning-single-cell-sequencing-data" title="Link to this heading">#</a></h2>
+<p>Alignment needs 10x barcode list. V3 chemistry whitelist is downloaded at <em>/gpfs/group/jopark/ref_genome/3M-february-2018.txt</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">        </span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--genomeDir<span class="w"> </span>/gpfs/home/jopark/ref_genome<span class="w">  </span><span class="se">\</span>
+<span class="w">            </span>--readFilesIn<span class="w"> </span>/dir/to/R2/fastq1,/dir/to/R2/fastq2,...<span class="w"> </span>/dir/to/R1/fastq1,/dir/to/R1/fastq2...<span class="se">\</span>
+<span class="w">            </span>--soloType<span class="w"> </span>Droplet<span class="w"> </span>--soloCBwhitelist<span class="w"> </span>/dir/to/whitelist<span class="se">\</span>
+<span class="w">            </span>--soloCellFilter<span class="w"> </span>EmptyDrops_CR<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--soloBarcodeReadLength<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="se">\</span>
+--soloFeatures<span class="w"> </span>SJ<span class="w">  </span><span class="c1">#if you want to output splice junction data</span>
+</pre></div>
+</div>
+</section>
+<section id="generating-index">
+<h2>Generating Index<a class="headerlink" href="#generating-index" title="Link to this heading">#</a></h2>
+<p><em>Note: once someone generates the index for a given species, different experiments can be aligned to the same index</em></p>
+<p>Index for mouse based on mm10 reference can be found at:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/gpfs/group/jin/ref_genomes/mm10
+</pre></div>
+</div>
+<p>For new indexes</p>
+<ol class="arabic simple">
+<li><p>Download reference genome (from 10x or other sources)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Reference should include the following two files:
+<em>GTF annotation files (.gtf)</em>
+<em>FASTA sequence files (.fa)</em></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Run STAR in genomeGenerate mode</p></li>
+</ol>
+<ul class="simple">
+<li><p>For sjdbOverhang parameter, use readLength-1</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">	</span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">		</span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span>--genomeDir<span class="w"> </span>/dir/to/output/index<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span>--genomeFastaFiles<span class="w"> </span>/dir/to/genome/fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">		</span>--sjdbGTFfile<span class="w"> </span>/dir/to/genome/gtf<span class="w"> </span>--sjdbOverhang<span class="w"> </span><span class="m">74</span><span class="w"> </span>
+<span class="w">		</span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">16</span><span class="w"> </span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/<span class="w"> </span>--genomeFastaFiles<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.fa<span class="w"> </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.gtf<span class="w"> </span>--sjdbOverhang<span class="w"> </span><span class="m">99</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-control">
+<h2>Quality control<a class="headerlink" href="#quality-control" title="Link to this heading">#</a></h2>
+<p>After navigating to the directory where you want the QC report stored, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>multiqc<span class="w"> </span>/dir/with/alignment/outputs
+</pre></div>
+</div>
+<p>Quality control output will be output as multiqc_report.html (see <a class="reference external" href="https://docs.seqera.io/multiqc#using-multiqc">here</a> for more info)</p>
+</section>
+<section id="alternative-resources">
+<h2>Alternative resources:<a class="headerlink" href="#alternative-resources" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="http://qualimap.conesalab.org/#what-is-qualimap">Qualimap</a>
+<a class="reference external" href="http://hartleys.github.io/QoRTs/">Quality of RNA-seq Tool-Set</a></p>
+</section>
+<section id="downstream-analyses">
+<h2>Downstream Analyses<a class="headerlink" href="#downstream-analyses" title="Link to this heading">#</a></h2>
+<p>Differential expression analysis using <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq-count-input">DESeq2 </a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/star_alignment"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../shareseq/shareseq.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Shareseq Pipeline Guide (Scripps HPC)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-bulk-sequencing-data">Aligning Bulk Sequencing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-single-cell-sequencing-data">Aligning Single Cell Sequencing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downstream-analyses">Downstream Analyses</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

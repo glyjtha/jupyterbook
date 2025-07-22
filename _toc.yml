@@ -64,5 +64,27 @@ parts:
   
   - caption: "File Storage System"
     chapters:
-      - file: content/storage/storage
+      - file: content/storage/file_storage
         title: "File Storage Systems Guide"
+
+  - caption: "NGS Indel "
+    chapters:
+      - file: content/ngs/ngs_indel
+        title: "NGS Indel Analysis Guide"
+
+  - caption: "Pipseq"
+    chapters:
+      - file: content/pipseq/pipseq
+        title: "Pipseq Analysis"
+      
+  - caption: "Shareseq"
+    chapters:
+      - file: content/shareseq/shareseq
+        title: "Shareseq Alignment & Analysis"
+
+  - caption: "STAR Alignment"
+    chapters:
+      - file: content/star_alignment/star
+        title: "STAR Alignment Guideline"
+    
+  

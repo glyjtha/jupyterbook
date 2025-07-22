@@ -11,6 +11,8 @@ parts:
         title: "Cell Ranger single-cell"
       - file: content/10x_analysis/single_cell_cluster_seurat
         title: "Seurat clustering"
+      - file: content/10x_analysis/cheatsheet
+        title: "10x Analysis Cheatsheet"
 
   - caption: "HPC Guides"
     chapters:
@@ -25,8 +27,22 @@ parts:
       - file: content/HPC/rstudioserver
         title: "RStudio Server"
 
-  - caption: "RNA Scope Analysis"
+  - caption: "RNA Scope Guides"
     chapters:
       - file: content/RNA_Scope_analysis/rna_scope
         title: "RNA Scope Analysis"
-      
+
+  - caption: "Basespace Run Guides"
+    chapters:
+      - file: content/base_run/base_run
+        title: "Basespace Run Creation"
+
+  - caption: "BD Rhapsody Pipeline Guides"
+    chapters:
+      - file: content/BD/bd
+        title: "BD Rhapsody Pipeline Setup"
+
+  - caption: "Public Dataset Downloads"
+    chapters:
+      - file: content/download/download
+        title: "Kriegstein Data Download Guide"

@@ -1,0 +1,30 @@
+/* custom.css */
+:root {
+    --pst-color-primary: #e67e22;  /* A pumpkin orange */
+    --pst-color-link: #d35400;     /* Darker orange for links */
+    --pst-color-warning: #f39c12;  /* Golden orange for warning blocks */
+  }
+  
+  /* Optional: change sidebar background */
+  .bd-sidebar {
+    background-color: #fff8f0; /* light cream background */
+  }
+  
+/* Stronger orange headers */
+h1, h2, h3, h4 {
+    color: #e67e22;
+  }
+  
+  /* Modify buttons */
+  button, .btn {
+    background-color: #e67e22;
+    border-color: #e67e22;
+  }
+  
+  button:hover, .btn:hover {
+    background-color: #d35400;
+  }
+
+body {
+background-color: #fff0e5 !important;
+}

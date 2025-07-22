@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Shareseq Pipeline Guide (Scripps HPC) &#8212; My sample book</title>
+    <title>Shareseq Pipeline Guide &#8212; My sample book</title>
   
   
   
@@ -225,6 +225,10 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../star_alignment/star.html">STAR Alignment Guideline</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transfer Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../transfer_data/transfer.html">Transfer Data from Sripps Genomic Core</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -406,7 +410,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Shareseq Pipeline Guide (Scripps HPC)</h1>
+    <h1>Shareseq Pipeline Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,25 +420,35 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">BEFORE YOU START</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important">IMPORTANT:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-update">DATA UPDATE:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-analysis">Post analysis:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kaushik">KAUSHIK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">Before You Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-update">Data Update</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rsync-commands">Example Rsync Commands</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment">Install Conda Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc">Setup for umi_tools 0.5.5 (already installed by JC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-higher-version-subread">Install Higher Version Subread</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use">Use</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-script">Run The Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-analysis">Post Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment">Install Conda Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc">Setup for umi_tools 0.5.5 (already installed by JC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-higher-version-subread">Install Higher Version Subread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-script">Running the Script</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-files">Download Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-tmux">How to use tmux:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mosh-for-stable-ssh">Install <code class="docutils literal notranslate"><span class="pre">mosh</span></code> for Stable SSH</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-env-python-2-7">INSTALL CONDA ENV (Python 2.7)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-bashrc">Edit <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add">Add:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rsync-example-script">Rsync Example Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tmux-for-session-management">Using tmux for Session Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mosh-for-stable-ssh">Install mosh for Stable SSH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment-python-2-7">Install Conda Environment (Python 2.7)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment">Create Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-bashrc">Edit .bashrc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-bashrc">Add to .bashrc</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-management">Script Management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rsync-script-upload">Example Rsync Script Upload</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-demultiplexing">Manual Demultiplexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-read-count-using-grep">Example Read Count Using grep</a></li>
 </ul>
@@ -448,137 +462,155 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="shareseq-pipeline-guide-scripps-hpc">
-<h1>Shareseq Pipeline Guide (Scripps HPC)<a class="headerlink" href="#shareseq-pipeline-guide-scripps-hpc" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="shareseq-pipeline-guide">
+<h1>Shareseq Pipeline Guide<a class="headerlink" href="#shareseq-pipeline-guide" title="Link to this heading">#</a></h1>
 <p><em>Shareseq package is already installed on Scripps HPC by JC</em></p>
 <section id="before-you-start">
-<h2>BEFORE YOU START<a class="headerlink" href="#before-you-start" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Install XQuartz (windows please use <a class="reference external" href="https://sourceforge.net/projects/xming/">Xming:</a>)</p></li>
-<li><p>Use ssh -Y <a class="reference external" href="mailto:xinjin&#37;&#52;&#48;login00&#46;scripps&#46;edu">xinjin<span>&#64;</span>login00<span>&#46;</span>scripps<span>&#46;</span>edu</a></p></li>
+<h2>Before You Start<a class="headerlink" href="#before-you-start" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Install XQuartz (Windows users please use <a class="reference external" href="https://sourceforge.net/projects/xming/">Xming</a>)</p></li>
+<li><p>Use SSH with X11 forwarding:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-Y<span class="w"> </span>xinjin@login00.scripps.edu
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
-<section id="important">
-<h2>IMPORTANT:<a class="headerlink" href="#important" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>module load python/2.7.11 # do not use other version of python! Low yaml version number</p></li>
+<section id="important-notes">
+<h2>Important Notes<a class="headerlink" href="#important-notes" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Critical:</strong> Use only the specified Python version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>python/2.7.11<span class="w">  </span><span class="c1"># do not use other version of python! Low yaml version number</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </section>
 <section id="data-update">
-<h2>DATA UPDATE:<a class="headerlink" href="#data-update" title="Link to this heading">#</a></h2>
+<h2>Data Update<a class="headerlink" href="#data-update" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Update the YMAL from dropbox</p></li>
+<li><p>Update the YAML from dropbox</p></li>
 <li><p>Update .sh from dropbox</p></li>
 <li><p>Identify the Illumina seq run folder and make sure the permission is correct – if not just copy to a new address for analysis permission</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-a<span class="w">  </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220517shareseq/SampleSheet.csv<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/Sequencing/nextseq/copy/220517_VH00464_139_AAC3CG3M5/
+<section id="example-rsync-commands">
+<h3>Example Rsync Commands<a class="headerlink" href="#example-rsync-commands" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy SampleSheet</span>
+rsync<span class="w"> </span>-a<span class="w"> </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220517shareseq/SampleSheet.csv<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/Sequencing/nextseq/copy/220517_VH00464_139_AAC3CG3M5/
 
+<span class="c1"># Download Python script</span>
 rsync<span class="w"> </span>xinjin@login00.scripps.edu:/opt/applications/shareseqalign/gnu/1.0/splitProjects_V4_novaseq_V2.py<span class="w"> </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220531shareseq_test/
 
+<span class="c1"># Download FASTA file</span>
 rsync<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/220517/testagain.fa<span class="w"> </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220617_shareseq_zhiyi_analysis
 </pre></div>
 </div>
 </section>
+</section>
 <section id="post-analysis">
-<h2>Post analysis:<a class="headerlink" href="#post-analysis" title="Link to this heading">#</a></h2>
+<h2>Post Analysis<a class="headerlink" href="#post-analysis" title="Link to this heading">#</a></h2>
+<p>Copy output files to analysis directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>*.pdf<span class="w"> </span>/gpfs/group/jin/xin/shareseq/220920shareseqtest/
 cp<span class="w"> </span>*.txt<span class="w"> </span>/gpfs/group/jin/xin/shareseq/220920shareseqtest/
 cp<span class="w"> </span>*counts.csv*<span class="w"> </span>/gpfs/group/jin/xin/shareseq/220920shareseqtest/
 cp<span class="w"> </span>*RefSeqTSS*<span class="w"> </span>/gpfs/group/jin/xin/shareseq/220920shareseqtest/
 </pre></div>
 </div>
-<section id="kaushik">
-<h3>KAUSHIK<a class="headerlink" href="#kaushik" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python/2.7.11
-</pre></div>
-</div>
 </section>
-</section>
+<section id="environment-setup">
+<h2>Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
 <section id="install-conda-environment">
-<h2>Install Conda Environment<a class="headerlink" href="#install-conda-environment" title="Link to this heading">#</a></h2>
+<h3>Install Conda Environment<a class="headerlink" href="#install-conda-environment" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/gpfs/home/xinjin/
 wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh<span class="w"> </span>
 <span class="nb">source</span><span class="w"> </span>~/.bashrc
-module<span class="w"> </span>load<span class="w"> </span>python/2.7.11<span class="w">  </span><span class="c1">#can run P2</span>
-<span class="nv">PYTHON3</span><span class="o">=</span>~/miniconda3/bin/python<span class="w"> </span><span class="c1">#can run P3</span>
-Type<span class="w"> </span>python2<span class="w"> </span>-&gt;<span class="w"> </span>yaml<span class="w"> </span>is<span class="w"> </span><span class="m">5</span>.4.1<span class="w"> </span>check
-
+module<span class="w"> </span>load<span class="w"> </span>python/2.7.11<span class="w">  </span><span class="c1"># can run P2</span>
+<span class="nv">PYTHON3</span><span class="o">=</span>~/miniconda3/bin/python<span class="w">  </span><span class="c1"># can run P3</span>
+<span class="c1"># Type python2 -&gt; yaml is 5.4.1 check</span>
 module<span class="w"> </span>purge
 </pre></div>
 </div>
 </section>
 <section id="setup-for-umi-tools-0-5-5-already-installed-by-jc">
-<h2>Setup for umi_tools 0.5.5 (already installed by JC)<a class="headerlink" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc" title="Link to this heading">#</a></h2>
+<h3>Setup for umi_tools 0.5.5 (already installed by JC)<a class="headerlink" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bashrc
 conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>py2711<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">2</span>.7
 <span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>py2711
-python<span class="w"> </span>--version<span class="w">  </span>//<span class="w"> </span>confirm<span class="w"> </span>version
-conda<span class="w"> </span>install<span class="w"> </span><span class="nv">umi_tools</span><span class="o">==</span><span class="m">0</span>.5.5<span class="w"> </span><span class="c1">## need sudo to do</span>
+python<span class="w"> </span>--version<span class="w">  </span><span class="c1"># confirm version</span>
+conda<span class="w"> </span>install<span class="w"> </span><span class="nv">umi_tools</span><span class="o">==</span><span class="m">0</span>.5.5<span class="w">  </span><span class="c1"># need sudo to do</span>
 </pre></div>
 </div>
 </section>
 <section id="install-higher-version-subread">
-<h2>Install Higher Version Subread<a class="headerlink" href="#install-higher-version-subread" title="Link to this heading">#</a></h2>
+<h3>Install Higher Version Subread<a class="headerlink" href="#install-higher-version-subread" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://sourceforge.net/projects/subread/files/subread-2.0.3/subread-2.0.3-source.tar.gz
-tar<span class="w"> </span>-xvf<span class="w"> </span>xxx
-<span class="nb">cd</span><span class="w"> </span>folder/src
+tar<span class="w"> </span>-xvf<span class="w"> </span>subread-2.0.3-source.tar.gz
+<span class="nb">cd</span><span class="w"> </span>subread-2.0.3-source/src
 make<span class="w"> </span>-f<span class="w"> </span>Makefile.Linux
 </pre></div>
 </div>
 </section>
-<section id="use">
-<h2>Use<a class="headerlink" href="#use" title="Link to this heading">#</a></h2>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/subread-2.0.3-source/bin/featureCounts<span class="w"> </span>
 ~/seqtk/seqtk
 </pre></div>
 </div>
 </section>
-<section id="run-the-script">
-<h2>Run The Script<a class="headerlink" href="#run-the-script" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Re start the terminal</p></li>
-</ul>
+</section>
+<section id="running-the-script">
+<h2>Running the Script<a class="headerlink" href="#running-the-script" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Restart the terminal</strong></p></li>
+<li><p><strong>Run with X11 forwarding:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>--x11<span class="w"> </span>--pty<span class="w"> </span>bash<span class="w"> </span>-i<span class="w"> </span>
 bash<span class="w"> </span>shareseq.sh<span class="w"> </span>
 </pre></div>
 </div>
+</li>
+</ol>
 </section>
 <section id="download-files">
 <h2>Download Files<a class="headerlink" href="#download-files" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-r<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/220517/output/sp.rna/downloadrna<span class="w"> </span>./
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download RNA output</span>
+rsync<span class="w"> </span>-r<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/220517/output/sp.rna/downloadrna<span class="w"> </span>./
+
+<span class="c1"># Upload indexing script</span>
 rsync<span class="w"> </span>-a<span class="w"> </span>./starindexing.sh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/
 </pre></div>
 </div>
 </section>
-<section id="how-to-use-tmux">
-<h2>How to use tmux:<a class="headerlink" href="#how-to-use-tmux" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux
-Control<span class="w"> </span>b,<span class="w"> </span><span class="k">then</span><span class="w"> </span>d<span class="w"> </span><span class="o">(</span>to<span class="w"> </span>leave<span class="o">)</span>
-tmux<span class="w"> </span>attach<span class="w"> </span><span class="o">(</span>is<span class="w"> </span>to<span class="w"> </span>attach<span class="w"> </span>back<span class="w"> </span>the<span class="w"> </span>screen<span class="o">)</span>
+<section id="using-tmux-for-session-management">
+<h2>Using tmux for Session Management<a class="headerlink" href="#using-tmux-for-session-management" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tmux<span class="w">                    </span><span class="c1"># start tmux session</span>
+<span class="c1"># Control + b, then d   # detach from session</span>
+tmux<span class="w"> </span>attach<span class="w">             </span><span class="c1"># reattach to session</span>
 </pre></div>
 </div>
 </section>
 <section id="install-mosh-for-stable-ssh">
-<h2>Install <code class="docutils literal notranslate"><span class="pre">mosh</span></code> for Stable SSH<a class="headerlink" href="#install-mosh-for-stable-ssh" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://mosh.org/#getting">mosh</a></p>
+<h2>Install mosh for Stable SSH<a class="headerlink" href="#install-mosh-for-stable-ssh" title="Link to this heading">#</a></h2>
+<p>For more stable SSH connections, install <a class="reference external" href="https://mosh.org/#getting">mosh</a>.</p>
 </section>
-<section id="install-conda-env-python-2-7">
-<h2>INSTALL CONDA ENV (Python 2.7)<a class="headerlink" href="#install-conda-env-python-2-7" title="Link to this heading">#</a></h2>
+<section id="install-conda-environment-python-2-7">
+<h2>Install Conda Environment (Python 2.7)<a class="headerlink" href="#install-conda-environment-python-2-7" title="Link to this heading">#</a></h2>
+<section id="create-environment">
+<h3>Create Environment<a class="headerlink" href="#create-environment" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>miniconda
 conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>xinenv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">2</span>.7.11
 <span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>xinenv
-python<span class="w"> </span>--version<span class="w">  </span>//<span class="w"> </span>confirm<span class="w"> </span>version
+python<span class="w"> </span>--version<span class="w">  </span><span class="c1"># confirm version</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Then install dependencies:</p></li>
-</ul>
+</section>
+<section id="install-dependencies">
+<h3>Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>numpy
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>argparse
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>anaconda<span class="w"> </span>more-itertools
 conda<span class="w"> </span>install<span class="w"> </span>pyyaml
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pyyaml</span><span class="o">==</span><span class="m">5</span>.3.1<span class="w"> </span><span class="c1">#need to be higher than 5.1</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pyyaml</span><span class="o">==</span><span class="m">5</span>.3.1<span class="w">  </span><span class="c1"># need to be higher than 5.1</span>
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>gzip
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>regex
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>python-levenshtein
@@ -586,47 +618,54 @@ conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> <
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>r-optparse
 conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>bioconda<span class="w"> </span>pysam
 conda<span class="w"> </span>install<span class="w"> </span>numpy
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">umi_tools</span><span class="o">==</span><span class="m">0</span>.5.5<span class="w"> </span>//only<span class="w"> </span>this<span class="w"> </span>version<span class="w"> </span>is<span class="w"> </span>fine<span class="w"> </span>w<span class="w"> </span>python2
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">umi_tools</span><span class="o">==</span><span class="m">0</span>.5.5<span class="w">  </span><span class="c1"># only this version is fine with python2</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>Environment location: <code class="docutils literal notranslate"><span class="pre">/gpfs/home/xinjin/.conda/envs/xinenv</span></code></p></li>
-</ul>
+<p><strong>Environment location:</strong> <code class="docutils literal notranslate"><span class="pre">/gpfs/home/xinjin/.conda/envs/xinenv</span></code></p>
 </section>
 <section id="edit-bashrc">
-<h2>Edit <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:<a class="headerlink" href="#edit-bashrc" title="Link to this heading">#</a></h2>
+<h3>Edit .bashrc<a class="headerlink" href="#edit-bashrc" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 </section>
-<section id="add">
-<h2>Add:<a class="headerlink" href="#add" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#module load miniconda</span>
-<span class="c1">#source activate xinenv</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span>’/gpfs/group/home/xinjin/.conda/envs/xinenv/lib/python2.7/site-packages’
+<section id="add-to-bashrc">
+<h3>Add to .bashrc<a class="headerlink" href="#add-to-bashrc" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># module load miniconda</span>
+<span class="c1"># source activate xinenv</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s1">&#39;/gpfs/group/home/xinjin/.conda/envs/xinenv/lib/python2.7/site-packages&#39;</span>
 </pre></div>
 </div>
 </section>
-<section id="rsync-example-script">
-<h2>Rsync Example Script<a class="headerlink" href="#rsync-example-script" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Rsync<span class="w"> </span>-a<span class="w"> </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220531shareseq_test/Split_seq_example.sh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/test/
+</section>
+<section id="script-management">
+<h2>Script Management<a class="headerlink" href="#script-management" title="Link to this heading">#</a></h2>
+<section id="example-rsync-script-upload">
+<h3>Example Rsync Script Upload<a class="headerlink" href="#example-rsync-script-upload" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-a<span class="w"> </span>/Users/xinjin/Dropbox<span class="se">\ \(</span>Scripps<span class="se">\ </span>Research<span class="se">\)</span>/Jin<span class="se">\ </span>Lab<span class="se">\ </span>Internal/Xin/scripts/220531shareseq_test/Split_seq_example.sh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/shareseq/test/
 
-chmod<span class="w"> </span>+x<span class="w"> </span>shareseq.sh<span class="w">      </span><span class="c1"># make it executable</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>shareseq.sh<span class="w">  </span><span class="c1"># make it executable</span>
 </pre></div>
 </div>
+</section>
 </section>
 <section id="manual-demultiplexing">
 <h2>Manual Demultiplexing<a class="headerlink" href="#manual-demultiplexing" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bcl2fastq<span class="w"> </span>-p<span class="w"> </span><span class="m">12</span><span class="w"> </span>--barcode-mismatches<span class="w"> </span><span class="m">1</span><span class="w"> </span>--output-dir<span class="w"> </span>./fastqs<span class="w"> </span>--no-lane-splitting<span class="w"> </span>--mask-short-adapter-reads<span class="w"> </span><span class="m">0</span><span class="w"> </span>--create-fastq-for-index-reads<span class="w">  </span><span class="m">2</span>&gt;&gt;./Run.log
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bcl2fastq<span class="w"> </span>-p<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--barcode-mismatches<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output-dir<span class="w"> </span>./fastqs<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--no-lane-splitting<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mask-short-adapter-reads<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--create-fastq-for-index-reads<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="m">2</span>&gt;&gt;./Run.log
 </pre></div>
 </div>
 </section>
 <section id="example-read-count-using-grep">
 <h2>Example Read Count Using grep<a class="headerlink" href="#example-read-count-using-grep" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">&quot;​​GCAGCTTTCCGGGCGATGCCA&quot;</span><span class="w"> </span>Bcl11b_S1_R1_001.fastq.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">&quot;GCAGCTTTCCGGGCGATGCCA&quot;</span><span class="w"> </span>Bcl11b_S1_R1_001.fastq.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </pre></div>
 </div>
-<p>grep “​​GCAGCTTTCCGGGCGATGCCA” Bcl11b_S1_R1_001.fastq.gz | wc -l</p>
 </section>
 </section>
 
@@ -695,25 +734,35 @@ chmod<span class="w"> </span>+x<span class="w"> </span>shareseq.sh<span class="w
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">BEFORE YOU START</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important">IMPORTANT:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-update">DATA UPDATE:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-analysis">Post analysis:</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kaushik">KAUSHIK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-start">Before You Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-update">Data Update</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rsync-commands">Example Rsync Commands</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment">Install Conda Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc">Setup for umi_tools 0.5.5 (already installed by JC)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-higher-version-subread">Install Higher Version Subread</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use">Use</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-script">Run The Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-analysis">Post Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment">Install Conda Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-for-umi-tools-0-5-5-already-installed-by-jc">Setup for umi_tools 0.5.5 (already installed by JC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-higher-version-subread">Install Higher Version Subread</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-script">Running the Script</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-files">Download Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-tmux">How to use tmux:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mosh-for-stable-ssh">Install <code class="docutils literal notranslate"><span class="pre">mosh</span></code> for Stable SSH</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-env-python-2-7">INSTALL CONDA ENV (Python 2.7)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-bashrc">Edit <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add">Add:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rsync-example-script">Rsync Example Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-tmux-for-session-management">Using tmux for Session Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mosh-for-stable-ssh">Install mosh for Stable SSH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-conda-environment-python-2-7">Install Conda Environment (Python 2.7)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment">Create Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-dependencies">Install Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-bashrc">Edit .bashrc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-to-bashrc">Add to .bashrc</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-management">Script Management</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rsync-script-upload">Example Rsync Script Upload</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-demultiplexing">Manual Demultiplexing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-read-count-using-grep">Example Read Count Using grep</a></li>
 </ul>

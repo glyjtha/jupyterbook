@@ -86,5 +86,10 @@ parts:
     chapters:
       - file: content/star_alignment/star
         title: "STAR Alignment Guideline"
+  
+  - caption: "Transfer Data"
+    chapters:
+      - file: content/transfer_data/transfer
+        title: "Transfer Data from Sripps Genomic Core"
     
   

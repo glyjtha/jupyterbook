@@ -63,7 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/star_alignment/star';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Shareseq Pipeline Guide (Scripps HPC)" href="../shareseq/shareseq.html" />
+    <link rel="next" title="Scripps Sequencing Data Processing Protocol" href="../transfer_data/transfer.html" />
+    <link rel="prev" title="Shareseq Pipeline Guide" href="../shareseq/shareseq.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -223,6 +224,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">STAR Alignment</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">STAR Alignment Guideline</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transfer Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../transfer_data/transfer.html">Transfer Data from Sripps Genomic Core</a></li>
 </ul>
 
     </div>
@@ -415,11 +420,21 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequencing-data-fastq">1. Sequencing Data (.fastq)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genome-index">2. Genome Index</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-bulk-sequencing-data">Aligning Bulk Sequencing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-single-cell-sequencing-data">Aligning Single Cell Sequencing Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-new-indexes">For New Indexes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative Resources:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downstream-analyses">Downstream Analyses</a></li>
 </ul>
             </nav>
@@ -434,24 +449,27 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="star-alignment-guide">
 <h1>STAR Alignment Guide<a class="headerlink" href="#star-alignment-guide" title="Link to this heading">#</a></h1>
-<p>For an introduction to using the high performance clusters, look {HPC Introduction}<code class="docutils literal notranslate"><span class="pre">../HPC/introduction.md</span></code></p>
+<p>For an introduction to using the high performance clusters, look at the <a class="reference internal" href="../HPC/introduction.html"><span class="std std-doc">HPC Introduction</span></a>.</p>
 <p>To perform an RNA-seq alignment using the STAR algorithm, you need the following:</p>
-<ol class="arabic simple">
-<li><p>Sequencing data (.fastq)</p></li>
-</ol>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<section id="sequencing-data-fastq">
+<h3>1. Sequencing Data (.fastq)<a class="headerlink" href="#sequencing-data-fastq" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Produced by sequencer</p></li>
-<li><p>ASTQ files contain the sequences frome each read and quality scores estimating the confidence of each base</p></li>
+<li><p>FASTQ files contain the sequences from each read and quality scores estimating the confidence of each base</p></li>
 </ul>
-<ol class="arabic simple" start="2">
-<li><p>Genome index</p></li>
-</ol>
+</section>
+<section id="genome-index">
+<h3>2. Genome Index<a class="headerlink" href="#genome-index" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Generated from reference genome</p></li>
 <li><p>Genome sequences against which sequencing reads are aligned with indexes generated by STAR algorithm</p></li>
 </ul>
-<p>For more information, manual is here.</p>
-<p>A good introductory reading: <a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon/lessons/03_QC_STAR_and_Qualimap_run.html">Link</a></p>
+<p>For more information, <a class="reference external" href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf">manual is here</a>.</p>
+<p><strong>A good introductory reading:</strong> <a class="reference external" href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon/lessons/03_QC_STAR_and_Qualimap_run.html">Introduction to RNA-seq using high-performance computing</a></p>
+</section>
+</section>
 <section id="aligning-bulk-sequencing-data">
 <h2>Aligning Bulk Sequencing Data<a class="headerlink" href="#aligning-bulk-sequencing-data" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/dir/to/fastq/files
@@ -460,14 +478,16 @@
 mkdir<span class="w"> </span>outs
 
 <span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>*R1*.fastq<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/_R1.*//g&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">do</span><span class="w"> </span>mkdir<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+<span class="k">do</span><span class="w"> </span>
+<span class="w">    </span>mkdir<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
 <span class="w">    </span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10<span class="w">  </span><span class="se">\</span>
-<span class="w">    </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10/refdata-gex-mm10-2020-A/genes/genes.gtf<span class="se">\</span>
-<span class="w">    </span>--readFilesIn<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R2_001.fastq<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R1_001.fastq<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--readFilesCommand<span class="w"> </span>zcat<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--quantMode<span class="w"> </span>GeneCounts<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--outFileNamePrefix<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="w">        </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10/refdata-gex-mm10-2020-A/genes/genes.gtf<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--readFilesIn<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R2_001.fastq<span class="w"> </span><span class="si">${</span><span class="nv">i</span><span class="si">}</span>_R1_001.fastq<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--readFilesCommand<span class="w"> </span>zcat<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--quantMode<span class="w"> </span>GeneCounts<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--outFileNamePrefix<span class="w"> </span>outs/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/
+<span class="k">done</span>
 
 /gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--genomeLoad<span class="w"> </span>Remove<span class="w"> </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10
 </pre></div>
@@ -475,63 +495,81 @@ mkdir<span class="w"> </span>outs
 </section>
 <section id="aligning-single-cell-sequencing-data">
 <h2>Aligning Single Cell Sequencing Data<a class="headerlink" href="#aligning-single-cell-sequencing-data" title="Link to this heading">#</a></h2>
-<p>Alignment needs 10x barcode list. V3 chemistry whitelist is downloaded at <em>/gpfs/group/jopark/ref_genome/3M-february-2018.txt</em></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">        </span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>--genomeDir<span class="w"> </span>/gpfs/home/jopark/ref_genome<span class="w">  </span><span class="se">\</span>
-<span class="w">            </span>--readFilesIn<span class="w"> </span>/dir/to/R2/fastq1,/dir/to/R2/fastq2,...<span class="w"> </span>/dir/to/R1/fastq1,/dir/to/R1/fastq2...<span class="se">\</span>
-<span class="w">            </span>--soloType<span class="w"> </span>Droplet<span class="w"> </span>--soloCBwhitelist<span class="w"> </span>/dir/to/whitelist<span class="se">\</span>
-<span class="w">            </span>--soloCellFilter<span class="w"> </span>EmptyDrops_CR<span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>--soloBarcodeReadLength<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="se">\</span>
---soloFeatures<span class="w"> </span>SJ<span class="w">  </span><span class="c1">#if you want to output splice junction data</span>
+<p>Alignment needs 10x barcode list. V3 chemistry whitelist is downloaded at <code class="docutils literal notranslate"><span class="pre">/gpfs/group/jopark/ref_genome/3M-february-2018.txt</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeDir<span class="w"> </span>/gpfs/home/jopark/ref_genome<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--readFilesIn<span class="w"> </span>/dir/to/R2/fastq1,/dir/to/R2/fastq2,...<span class="w"> </span>/dir/to/R1/fastq1,/dir/to/R1/fastq2...<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--soloType<span class="w"> </span>Droplet<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--soloCBwhitelist<span class="w"> </span>/dir/to/whitelist<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--soloCellFilter<span class="w"> </span>EmptyDrops_CR<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--soloBarcodeReadLength<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--soloFeatures<span class="w"> </span>SJ<span class="w">  </span><span class="c1"># if you want to output splice junction data</span>
 </pre></div>
 </div>
 </section>
 <section id="generating-index">
 <h2>Generating Index<a class="headerlink" href="#generating-index" title="Link to this heading">#</a></h2>
-<p><em>Note: once someone generates the index for a given species, different experiments can be aligned to the same index</em></p>
+<p><strong>Note:</strong> Once someone generates the index for a given species, different experiments can be aligned to the same index.</p>
 <p>Index for mouse based on mm10 reference can be found at:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/gpfs/group/jin/ref_genomes/mm10
 </pre></div>
 </div>
-<p>For new indexes</p>
+<section id="for-new-indexes">
+<h3>For New Indexes<a class="headerlink" href="#for-new-indexes" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Download reference genome (from 10x or other sources)</p></li>
-</ol>
+<li><p><strong>Download reference genome</strong> (from 10x or other sources)</p>
 <ul class="simple">
-<li><p>Reference should include the following two files:
-<em>GTF annotation files (.gtf)</em>
-<em>FASTA sequence files (.fa)</em></p></li>
+<li><p>Reference should include the following two files:</p>
+<ul>
+<li><p><strong>GTF annotation files (.gtf)</strong></p></li>
+<li><p><strong>FASTA sequence files (.fa)</strong></p></li>
 </ul>
-<ol class="arabic simple" start="2">
-<li><p>Run STAR in genomeGenerate mode</p></li>
-</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>Run STAR in genomeGenerate mode</strong></p>
 <ul class="simple">
 <li><p>For sjdbOverhang parameter, use readLength-1</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">	</span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
-<span class="w">		</span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span>--genomeDir<span class="w"> </span>/dir/to/output/index<span class="w"> </span><span class="se">\</span>
-<span class="w">		</span>--genomeFastaFiles<span class="w"> </span>/dir/to/genome/fasta<span class="w"> </span><span class="se">\</span>
-<span class="w">		</span>--sjdbGTFfile<span class="w"> </span>/dir/to/genome/gtf<span class="w"> </span>--sjdbOverhang<span class="w"> </span><span class="m">74</span><span class="w"> </span>
-<span class="w">		</span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">16</span><span class="w"> </span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/<span class="w"> </span>--genomeFastaFiles<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.fa<span class="w"> </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.gtf<span class="w"> </span>--sjdbOverhang<span class="w"> </span><span class="m">99</span>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="o">=</span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeDir<span class="w"> </span>/dir/to/output/index<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeFastaFiles<span class="w"> </span>/dir/to/genome/fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sjdbGTFfile<span class="w"> </span>/dir/to/genome/gtf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sjdbOverhang<span class="w"> </span><span class="m">74</span><span class="w"> </span>
+</pre></div>
+</div>
+<p><strong>Example command:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/gpfs/group/jin/software/STAR-2.7.9a/source/STAR<span class="w"> </span>--runThreadN<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--runMode<span class="w"> </span>genomeGenerate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeDir<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genomeFastaFiles<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.fa<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sjdbGTFfile<span class="w"> </span>/gpfs/group/jin/ref_genomes/mm10_GFP/genome_GFP.gtf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sjdbOverhang<span class="w"> </span><span class="m">99</span>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="quality-control">
-<h2>Quality control<a class="headerlink" href="#quality-control" title="Link to this heading">#</a></h2>
-<p>After navigating to the directory where you want the QC report stored, run</p>
+<h2>Quality Control<a class="headerlink" href="#quality-control" title="Link to this heading">#</a></h2>
+<p>After navigating to the directory where you want the QC report stored, run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>multiqc<span class="w"> </span>/dir/with/alignment/outputs
 </pre></div>
 </div>
-<p>Quality control output will be output as multiqc_report.html (see <a class="reference external" href="https://docs.seqera.io/multiqc#using-multiqc">here</a> for more info)</p>
-</section>
+<p>Quality control output will be generated as <code class="docutils literal notranslate"><span class="pre">multiqc_report.html</span></code> (see <a class="reference external" href="https://docs.seqera.io/multiqc#using-multiqc">MultiQC documentation</a> for more info).</p>
 <section id="alternative-resources">
-<h2>Alternative resources:<a class="headerlink" href="#alternative-resources" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="http://qualimap.conesalab.org/#what-is-qualimap">Qualimap</a>
-<a class="reference external" href="http://hartleys.github.io/QoRTs/">Quality of RNA-seq Tool-Set</a></p>
+<h3>Alternative Resources:<a class="headerlink" href="#alternative-resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://qualimap.conesalab.org/#what-is-qualimap">Qualimap</a></p></li>
+<li><p><a class="reference external" href="http://hartleys.github.io/QoRTs/">Quality of RNA-seq Tool-Set (QoRTs)</a></p></li>
+</ul>
+</section>
 </section>
 <section id="downstream-analyses">
 <h2>Downstream Analyses<a class="headerlink" href="#downstream-analyses" title="Link to this heading">#</a></h2>
-<p>Differential expression analysis using <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq-count-input">DESeq2 </a></p>
+<p>Differential expression analysis using <a class="reference external" href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq-count-inp">DESeq2</a></p>
 </section>
 </section>
 
@@ -571,8 +609,17 @@ mkdir<span class="w"> </span>outs
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Shareseq Pipeline Guide (Scripps HPC)</p>
+        <p class="prev-next-title">Shareseq Pipeline Guide</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../transfer_data/transfer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Scripps Sequencing Data Processing Protocol</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -591,11 +638,21 @@ mkdir<span class="w"> </span>outs
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequencing-data-fastq">1. Sequencing Data (.fastq)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genome-index">2. Genome Index</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-bulk-sequencing-data">Aligning Bulk Sequencing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aligning-single-cell-sequencing-data">Aligning Single Cell Sequencing Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality control</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-index">Generating Index</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-new-indexes">For New Indexes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control">Quality Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-resources">Alternative Resources:</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downstream-analyses">Downstream Analyses</a></li>
 </ul>
   </nav></div>

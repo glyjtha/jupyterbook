@@ -15,3 +15,48 @@ h1, h2, h3, h4 {
     color: #e67e22;
   }
   
+/* =====================================================
+   DARK‑MODE ONLY  |  Orange sidebar + Black content
+   ===================================================== */
+   [data-theme="dark"] body {
+    background: #000000;                 /* page background (black) */
+  }
+  
+  /* ---------- Main reading area ---------- */
+  [data-theme="dark"] .bd-main,
+  [data-theme="dark"] .bd-content {
+    background: #000000;                 /* same as body for a seamless look */
+    color: #E5E5E5;                      /* light grey text for contrast */
+  }
+  
+  /* ---------- Left (primary) sidebar ---------- */
+  [data-theme="dark"] .bd-sidebar {
+    background: #E78B33;                
+    color: #FFFFFF;
+    border-right: none;                  /* remove divider */
+  }
+  
+  /* Sidebar links */
+  [data-theme="dark"] .bd-sidebar a {
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+  
+  /* Current page & hover state */
+  [data-theme="dark"] .bd-sidebar a.current,
+  [data-theme="dark"] .bd-sidebar a:hover {
+    color: #000000;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+  }
+  
+  /* Search box inside sidebar */
+  [data-theme="dark"] .bd-sidebar .search-button-field input {
+    background: rgba(32, 32, 32, 0.15);
+    color: #FFFFFF;
+    border-color: transparent;
+  }
+  [data-theme="dark"] .bd-sidebar .search-button-field input::placeholder {
+    color: #F5E8D8;
+  }
+  

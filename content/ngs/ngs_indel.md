@@ -134,6 +134,8 @@ rsync xinjin@login00.scripps.edu:/FILE_TO_DOWNLOAD LOCALADDRESS
    - Number of the reverse NGS2 primer
    - Amplicon sequence (excluding the common handles for NGS)
    - gRNA (targeting sites for the nuclease)
+   See example below:
+   [image](../image/image6.png)
 4. Column or row title should not be included
 5. Rename the spreadsheet as "processlist.xlsx" and put it under your working folder
 
@@ -156,6 +158,7 @@ After the program is finished (usually in a few minutes), you will have a "_inde
 - **nReadsMapped:** the number of reads that have the given barcode and successfully mapped to your amplicon
 - **indelpct:** the percentage of reads with indels that mapped to your amplicon
 - **nReadsScanned:** the number of reads that have the given barcode
+[image6](../image/image7.png)
 
 Since the indelpct contains both in-frame and frameshift indels, you need to add another column to calculate the percentage of frameshift indels only (nFrameshift/nReadsMapped). This percentage corresponds to your gRNA targeting efficiency.
 

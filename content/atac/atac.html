@@ -1,0 +1,1062 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bulk ATAC-seq Analysis &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/atac/atac';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Jin Lab Cut&amp;Run Analysis Guideline" href="../c_and_r/cr.html" />
+    <link rel="prev" title="Bulk downloading kriegstein single-cell data" href="../download/download.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jin Lab Dry Lab Handbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">10x Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_atac.html">Cell Ranger ATAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_singlecell.html">Cell Ranger single-cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/single_cell_cluster_seurat.html">Seurat clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cheatsheet.html">10x Analysis Cheatsheet</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HPC Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/introduction.html">HPC Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/cluster.html">Cluster Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/request.html">Job Request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/r.html">R Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/rstudioserver.html">RStudio Server</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNA Scope Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RNA_Scope_analysis/rna_scope.html">RNA Scope Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basespace Run Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../base_run/base_run.html">Basespace Run Creation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BD Rhapsody Pipeline Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../BD/bd.html">BD Rhapsody Pipeline Setup</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public Dataset Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../download/download.html">Kriegstein Data Download Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ATAC-seq</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ATAC-seq Analysis Guides</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cut and Run</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../c_and_r/cr.html">C &amp; R Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Demultiplexing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../demultiplexing/demulti.html">Demultiplexing Script</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Storage System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../storage/file_storage.html">File Storage Systems Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NGS Indel </span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ngs/ngs_indel.html">NGS Indel Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipseq/pipseq.html">Pipseq Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Shareseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../shareseq/shareseq.html">Shareseq Pipeline Guide (Scripps HPC)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STAR Alignment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../star_alignment/star.html">STAR Alignment Guide</a></li>
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/atac/atac.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/atac/atac.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bulk ATAC-seq Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-protocol">Experimental Protocol</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atac-quick-qc">ATAC Quick QC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-pepatac">Running PEPATAC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-csv">1. Create sample.csv</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-looper-config-file-xxx-yaml">2. Create looper config file (XXX.yaml)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-genome-setup">3. Reference Genome Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-pipeline">4. Run Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-chart">Resources Chart</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-analytical-pipelines">Alternative Analytical Pipelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-pipeline">ENCODE Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pepatac-singularity-approach">PEPATAC Singularity Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qc-results-tables">QC Results Tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-batch-results">First Batch Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-batch-results">Second Batch Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-singularity-command-example">Manual Singularity Command Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-organization-commands">File Organization Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling-manual-bypass">Error Handling / Manual Bypass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffbind-analysis">DiffBind Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-pipeline">Manual Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-setup">Conda Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software-installation">Software Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#known-dependency-issues">Known Dependency Issues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-summary">Processing Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atac-seq-processing-steps">ATAC-seq Processing Steps:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bulk-atac-seq-analysis">
+<h1>Bulk ATAC-seq Analysis<a class="headerlink" href="#bulk-atac-seq-analysis" title="Link to this heading">#</a></h1>
+<section id="experimental-protocol">
+<h2>Experimental Protocol<a class="headerlink" href="#experimental-protocol" title="Link to this heading">#</a></h2>
+<p>See Dropbox/10x Genomics/bulkATAC for the Corces lab protocol</p>
+</section>
+<section id="atac-quick-qc">
+<h2>ATAC Quick QC<a class="headerlink" href="#atac-quick-qc" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Reference</strong>: <a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/ATACseqQC.html">https://bioconductor.org/packages/release/bioc/html/ATACseqQC.html</a></p></li>
+<li><p>Check TSS</p></li>
+<li><p>Check dup rate (&gt; 50% is considered saturation)</p></li>
+</ul>
+</section>
+<section id="running-pepatac">
+<h2>Running PEPATAC<a class="headerlink" href="#running-pepatac" title="Link to this heading">#</a></h2>
+<section id="create-sample-csv">
+<h3>1. Create sample.csv<a class="headerlink" href="#create-sample-csv" title="Link to this heading">#</a></h3>
+<p>See or copy <code class="docutils literal notranslate"><span class="pre">/gpfs/group/jin/Joshua/pepatac/230408Jill/sample.csv</span></code> for an example</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>sample_name,protocol,organism,read1,read2,read_type
+A50k_S2,ATAC,mouse,R1,R2,paired
+AB50k_S3,ATAC,mouse,R1,R2,paired
+AB5k_1_S4,ATAC,mouse,R1,R2,paired
+</pre></div>
+</div>
+</section>
+<section id="create-looper-config-file-xxx-yaml">
+<h3>2. Create looper config file (XXX.yaml)<a class="headerlink" href="#create-looper-config-file-xxx-yaml" title="Link to this heading">#</a></h3>
+<p>Ensure the bolded fields are updated appropriately.
+See or copy <code class="docutils literal notranslate"><span class="pre">/gpfs/group/jin/Joshua/pepatac/230408Jill/230408Jill.yaml</span></code> for an example</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ProjectName</span>
+
+<span class="nt">pep_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0.0</span>
+<span class="nt">sample_table</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/samples.csv</span>
+
+<span class="nt">looper</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/output&quot;</span>
+<span class="w">  </span><span class="nt">pipeline_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/gpfs/group/jin/software/pepatac/project_pipeline_interface.yaml&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">sample_modifiers</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">append</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">pipeline_interfaces</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/gpfs/group/jin/software/pepatac/sample_pipeline_interface.yaml&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">derive</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">attributes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">read1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">read2</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">sources</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">R1</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/fastq_files/{sample_name}_R1_001.fastq.gz&quot;</span>
+<span class="w">      </span><span class="nt">R2</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/fastq_files/{sample_name}_R2_001.fastq.gz&quot;</span>
+<span class="w">  </span><span class="nt">imply</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">organism</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;mouse&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Mus</span><span class="nv"> </span><span class="s">musculus&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Mouse&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Mus</span><span class="nv"> </span><span class="s">musculus&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">then</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">genome</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mm10</span>
+<span class="w">        </span><span class="c1">#prealignment_names: []</span>
+<span class="w">        </span><span class="nt">deduplicator</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">samblaster</span><span class="w"> </span><span class="c1"># Default. [options: picard]</span>
+<span class="w">        </span><span class="nt">trimmer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skewer</span><span class="w">          </span><span class="c1"># Default. [options: pyadapt, trimmomatic]</span>
+<span class="w">        </span><span class="nt">peak_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fixed</span><span class="w">         </span><span class="c1"># Default. [options: variable]</span>
+<span class="w">        </span><span class="nt">extend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;250&quot;</span><span class="w">            </span><span class="c1"># Default. For fixed-width peaks, extend this distance up- and down-stream.</span>
+<span class="w">        </span><span class="nt">frip_ref_peaks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w">     </span><span class="c1"># Default. Use an external reference set of peaks instead of the peaks called from this run</span>
+</pre></div>
+</div>
+</section>
+<section id="reference-genome-setup">
+<h3>3. Reference Genome Setup<a class="headerlink" href="#reference-genome-setup" title="Link to this heading">#</a></h3>
+<p>Ensure appropriate refgenie references have been downloaded at <code class="docutils literal notranslate"><span class="pre">/gpfs/group/jin/ref_genomes/pepatac</span></code> (hg38 and mm10 references are already available)</p>
+<p><strong>Note</strong>: Do not have to do this if using already downloaded reference!</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>/gpfs/group/jin/software/pepatac_env
+refgenie<span class="w"> </span>pull<span class="w"> </span>XYZ
+</pre></div>
+</div>
+</section>
+<section id="run-pipeline">
+<h3>4. Run Pipeline<a class="headerlink" href="#run-pipeline" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make screen session</span>
+screen<span class="w"> </span>-S<span class="w"> </span>name_of_session
+
+<span class="c1"># Request a node first (appropriate resources are below)</span>
+<span class="nb">cd</span><span class="w"> </span>/path/to/your_config.yaml
+srun<span class="w"> </span>--time<span class="o">=</span><span class="m">24</span>:00:00<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">16</span><span class="w"> </span>--mem<span class="o">=</span><span class="m">16000</span><span class="w"> </span>--pty<span class="w"> </span>bash
+conda<span class="w"> </span>activate<span class="w"> </span>/gpfs/group/jin/software/pepatac_env
+<span class="nb">export</span><span class="w"> </span><span class="nv">REFGENIE</span><span class="o">=</span>/gpfs/group/jin/ref_genomes/pepatac/genome_config.yaml
+looper<span class="w"> </span>run<span class="w"> </span>XXX.yaml
+looper<span class="w"> </span>runp<span class="w"> </span>XXX.yaml
+looper<span class="w"> </span>report<span class="w"> </span>XXX.yaml
+</pre></div>
+</div>
+</section>
+<section id="resources-chart">
+<h3>Resources Chart<a class="headerlink" href="#resources-chart" title="Link to this heading">#</a></h3>
+<p>For sample runs only (one at a time, most cases for us right now). For parallel processing see documentation.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Max File Size</p></th>
+<th class="head"><p>CPU-per-task</p></th>
+<th class="head"><p>Memory</p></th>
+<th class="head"><p>Time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.05</p></td>
+<td><p>4</p></td>
+<td><p>8000</p></td>
+<td><p>3:00:00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.5</p></td>
+<td><p>8</p></td>
+<td><p>10000</p></td>
+<td><p>6:00:00</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>12</p></td>
+<td><p>12000</p></td>
+<td><p>8:00:00</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>24</p></td>
+<td><p>16000</p></td>
+<td><p>16:00:00</p></td>
+</tr>
+<tr class="row-even"><td><p>NaN</p></td>
+<td><p>32</p></td>
+<td><p>32000</p></td>
+<td><p>24:00:00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="alternative-analytical-pipelines">
+<h2>Alternative Analytical Pipelines<a class="headerlink" href="#alternative-analytical-pipelines" title="Link to this heading">#</a></h2>
+<section id="encode-pipeline">
+<h3>ENCODE Pipeline<a class="headerlink" href="#encode-pipeline" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>GitHub</strong>: <a class="github reference external" href="https://github.com/ENCODE-DCC/atac-seq-pipeline">ENCODE-DCC/atac-seq-pipeline</a></p></li>
+<li><p><strong>Documentation</strong>: <a class="reference external" href="https://www.encodeproject.org/atac-seq/">https://www.encodeproject.org/atac-seq/</a></p></li>
+<li><p>Install caper (using pip)</p></li>
+<li><p>Correct the conf file: account=jin, partition=shared</p></li>
+<li><p>Git clone the pipeline</p></li>
+<li><p>Define JSON for your sample input</p></li>
+<li><p>Path: <code class="docutils literal notranslate"><span class="pre">/usr/bin/singularity</span></code></p></li>
+</ul>
+</section>
+<section id="pepatac-singularity-approach">
+<h3>PEPATAC Singularity Approach<a class="headerlink" href="#pepatac-singularity-approach" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Documentation</strong>: <a class="reference external" href="https://pepatac.databio.org/en/latest/tutorial/">https://pepatac.databio.org/en/latest/tutorial/</a></p></li>
+</ul>
+</section>
+</section>
+<section id="qc-results-tables">
+<h2>QC Results Tables<a class="headerlink" href="#qc-results-tables" title="Link to this heading">#</a></h2>
+<section id="first-batch-results">
+<h3>First Batch Results<a class="headerlink" href="#first-batch-results" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>Dup Rate</p></th>
+<th class="head"><p>TSS</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>M1_Veh_A_S1</p></td>
+<td><p>2.23</p></td>
+<td><p>2.1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>M1_Veh_B_S2</p></td>
+<td><p>1.9</p></td>
+<td><p>2.3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>M1_Veh_C_S3</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>Pipeline crashes</p></td>
+</tr>
+<tr class="row-odd"><td><p>M2_Veh_A_S4</p></td>
+<td><p>2</p></td>
+<td><p>1.9</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>M2_Veh_B_S5</p></td>
+<td><p>2.2</p></td>
+<td><p>3.6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>M2_Veh_C_S6</p></td>
+<td><p>2.6</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>F3_Veh_A_S7</p></td>
+<td><p>-</p></td>
+<td><p>3.3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>F3_Veh_B_S8</p></td>
+<td><p>2.2</p></td>
+<td><p>2.1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>M4_E2_A_S9</p></td>
+<td><p>2.2</p></td>
+<td><p>4.6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>M4_E2_B_S10</p></td>
+<td><p>2.1</p></td>
+<td><p>3.4</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>M4_E2_C_S11</p></td>
+<td><p>1.8</p></td>
+<td><p>2.5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>F5_E2_A_S12</p></td>
+<td><p>0.8</p></td>
+<td><p>2.6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>F5_E2_B_S13</p></td>
+<td><p>2.2</p></td>
+<td><p>2.7</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>F5_E2_C_S14</p></td>
+<td><p>2.4</p></td>
+<td><p>2.1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>F6_E2_A_S15</p></td>
+<td><p>2.1</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>F6_E2_B_S16</p></td>
+<td><p>2.5</p></td>
+<td><p>4.5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>F6_E2_C_S17</p></td>
+<td><p>3.2</p></td>
+<td><p>3.5</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="second-batch-results">
+<h3>Second Batch Results<a class="headerlink" href="#second-batch-results" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sample</p></th>
+<th class="head"><p>Dup Rate</p></th>
+<th class="head"><p>TSS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>T50k_S1</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>A50k_S2</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>AB50k_S3</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>AB5k_1_S4</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>AB5k_2_S5</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>AB5k_3_S6</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="manual-singularity-command-example">
+<h2>Manual Singularity Command Example<a class="headerlink" href="#manual-singularity-command-example" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SAMPLE</span><span class="o">=</span><span class="s2">&quot;T50k_S1&quot;</span>
+<span class="nb">cd</span><span class="w"> </span>/gpfs/group/jin/xin/atac/230409Jill
+singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--bind<span class="w"> </span><span class="s2">&quot;/gpfs/group/jin:/gpfs/group/jin&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/gpfs/group/jin/software/pepatac_singularity<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/gpfs/group/jin/software/pepatac/pipelines/pepatac.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--single-or-paired<span class="w"> </span>paired<span class="se">\</span>
+<span class="w">    </span>--genome<span class="w"> </span>mm10<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--genome-index<span class="w"> </span>/gpfs/group/jin/ref_genomes/pepatac/data/0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bowtie2_index/default/0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--chrom-sizes<span class="w"> </span>/gpfs/group/jin/ref_genomes/pepatac/alias/mm10/fasta/default/mm10.chrom.sizes<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--TSS-name<span class="w"> </span>/gpfs/group/jin/ref_genomes/pepatac/alias/mm10/ensembl_gtf/default/mm10_ensembl_TSS.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sample-name<span class="w"> </span><span class="nv">$SAMPLE</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span><span class="s2">&quot;/gpfs/group/jin/sequencing/iseq/20230408_FS10002641_13_BRR99425-2309/fastq_files/</span><span class="si">${</span><span class="nv">SAMPLE</span><span class="si">}</span><span class="s2">_R1_001.fastq.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input2<span class="w"> </span><span class="s2">&quot;/gpfs/group/jin/sequencing/iseq/20230408_FS10002641_13_BRR99425-2309/fastq_files/</span><span class="si">${</span><span class="nv">SAMPLE</span><span class="si">}</span><span class="s2">_R2_001.fastq.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-O<span class="w"> </span>/gpfs/group/jin/xin/atac/230409Jill/<span class="w"> </span>&gt;<span class="w"> </span>/gpfs/group/jin/xin/atac/230409Jill/output/new_<span class="nv">$SAMPLE</span>.out<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/gpfs/group/jin/xin/atac/230317Jill/output/new_<span class="nv">$SAMPLE</span>.err
+</pre></div>
+</div>
+</section>
+<section id="file-organization-commands">
+<h2>File Organization Commands<a class="headerlink" href="#file-organization-commands" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy features file</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span>DONE<span class="w"> </span>-execdir<span class="w"> </span>cp<span class="w"> </span>/Users/percyli/Desktop/features<span class="se">\[</span><span class="m">30</span>,55<span class="se">\]</span>.R<span class="w"> </span>.<span class="w"> </span><span class="se">\;</span>
+
+<span class="c1"># Organize TSS files</span>
+mkdir<span class="w"> </span>TSS
+rsync<span class="w"> </span>-amv<span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/&#39;</span><span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/QC_mm10/*enrichment.pdf&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span>./<span class="w"> </span>./TSS
+<span class="nb">cd</span><span class="w"> </span>TSS
+mv<span class="w"> </span>-v<span class="w"> </span>./*/*/*<span class="w"> </span>./
+
+<span class="c1"># Organize duplication metrics</span>
+rsync<span class="w"> </span>-amv<span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/&#39;</span><span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/aligned_mm10/*dedup_metrics_log*&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span>./<span class="w"> </span>./dup
+mv<span class="w"> </span>-v<span class="w"> </span>./*/*/*<span class="w"> </span>./
+
+<span class="c1"># Organize FastQC files</span>
+mkdir<span class="w"> </span>fastqc
+rsync<span class="w"> </span>-amv<span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/&#39;</span><span class="w"> </span>--include<span class="w"> </span><span class="s1">&#39;*/fastqc/*fastqc.html&#39;</span><span class="w"> </span>--exclude<span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span>./<span class="w"> </span>./fastqc
+<span class="nb">cd</span><span class="w"> </span>fastqc
+mv<span class="w"> </span>-v<span class="w"> </span>./*/*/*<span class="w"> </span>./
+</pre></div>
+</div>
+</section>
+<section id="error-handling-manual-bypass">
+<h2>Error Handling / Manual Bypass<a class="headerlink" href="#error-handling-manual-bypass" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>/gpfs/group/jin/software/pepatac_env/
+<span class="nb">cd</span><span class="w"> </span>/gpfs/group/jin/xin/atac/230409Jill/
+Rscript<span class="w"> </span>/gpfs/group/jin/software/pepatac/tools/PEPATAC.R<span class="w"> </span>reduce<span class="w"> </span>-i<span class="w"> </span>/gpfs/group/jin/xin/atac/230409Jill/AB5k_3_S6/peak_calling_mm10/AB5k_3_S6_peaks_fixedWidth.narrowPeak<span class="w"> </span>-s<span class="w"> </span>AB5k_3_S6<span class="w"> </span>-c<span class="w"> </span>/gpfs/group/jin/ref_genomes/pepatac/alias/mm10/fasta/default/mm10.chrom.sizes<span class="w"> </span>--normalize
+</pre></div>
+</div>
+</section>
+<section id="diffbind-analysis">
+<h2>DiffBind Analysis<a class="headerlink" href="#diffbind-analysis" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start interactive session and run R DiffBind</span>
+srun<span class="w"> </span>--time<span class="o">=</span><span class="m">15</span>:00:00<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">16</span><span class="w"> </span>--mem<span class="o">=</span><span class="m">16000</span><span class="w"> </span>--pty<span class="w"> </span>bash
+</pre></div>
+</div>
+<p>Use DiffBind, see R script in <code class="docutils literal notranslate"><span class="pre">xin/atatc/</span></code> folder</p>
+<p><strong>Reference</strong>: <a class="reference external" href="https://ucdavis-bioinformatics-training.github.io/2020-Epigenetics_Workshop/data_analysis/chip_atac/atac_R">https://ucdavis-bioinformatics-training.github.io/2020-Epigenetics_Workshop/data_analysis/chip_atac/atac_R</a></p>
+</section>
+<section id="manual-pipeline">
+<h2>Manual Pipeline<a class="headerlink" href="#manual-pipeline" title="Link to this heading">#</a></h2>
+<p><strong>Guideline from Harvard RC</strong>: <a class="reference external" href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">https://informatics.fas.harvard.edu/atac-seq-guidelines.html</a></p>
+<section id="conda-environment-setup">
+<h3>Conda Environment Setup<a class="headerlink" href="#conda-environment-setup" title="Link to this heading">#</a></h3>
+<p>For conda users on HPC, switch to conda-forge:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
+conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>bioconda
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
+</pre></div>
+</div>
+<p>Make sure your <code class="docutils literal notranslate"><span class="pre">./condarc</span></code> looks like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">auto_activate_base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="nt">channel_priority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">strict</span>
+<span class="nt">auto_update_conda</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</pre></div>
+</div>
+</section>
+<section id="software-installation">
+<h3>Software Installation<a class="headerlink" href="#software-installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate existing environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>xinenv
+
+<span class="c1"># Install cutadapt</span>
+conda<span class="w"> </span>install<span class="w"> </span>cutadapt
+
+<span class="c1"># Cutadapt command example</span>
+cutadapt<span class="w"> </span>-a<span class="w"> </span>CTGTCTCTTATACACATCT<span class="w"> </span>-q<span class="w"> </span><span class="m">30</span><span class="w"> </span>--minimum-length<span class="w"> </span><span class="m">36</span><span class="w"> </span>--paired-output<span class="w"> </span>-o<span class="w"> </span>output.fastq.gz<span class="w"> </span>input.fastq.gz
+
+<span class="c1"># Bowtie2 setup</span>
+module<span class="w"> </span>load<span class="w"> </span>bowtie2
+bowtie2-build<span class="w"> </span>&lt;genome.fa&gt;<span class="w"> </span>&lt;genomeIndexName&gt;
+</pre></div>
+</div>
+</section>
+<section id="known-dependency-issues">
+<h3>Known Dependency Issues<a class="headerlink" href="#known-dependency-issues" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span> <span class="n">pip</span><span class="s1">&#39;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span>
+<span class="n">yte</span> <span class="mf">1.2.2</span> <span class="n">requires</span> <span class="n">pyyaml</span><span class="o">&lt;</span><span class="mf">7.0</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">pyyaml</span> <span class="mf">5.4.1</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">schema</span><span class="o">-</span><span class="n">salad</span> <span class="mf">7.1.20210316164414</span> <span class="n">requires</span> <span class="n">CacheControl</span><span class="o">&lt;</span><span class="mf">0.12</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">0.11.7</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">cachecontrol</span> <span class="mf">0.12.10</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">hail</span> <span class="mf">0.2.94</span> <span class="n">requires</span> <span class="n">requests</span><span class="o">==</span><span class="mf">2.25.1</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">requests</span> <span class="mf">2.28.2</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+<span class="n">dxpy</span> <span class="mf">0.326.1</span> <span class="n">requires</span> <span class="n">requests</span><span class="o">&lt;=</span><span class="mf">2.27.1</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">2.8.0</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">have</span> <span class="n">requests</span> <span class="mf">2.28.2</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">incompatible</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="processing-summary">
+<h2>Processing Summary<a class="headerlink" href="#processing-summary" title="Link to this heading">#</a></h2>
+<section id="atac-seq-processing-steps">
+<h3>ATAC-seq Processing Steps:<a class="headerlink" href="#atac-seq-processing-steps" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Adapter Trimming</strong>: Adapter sequences were trimmed from ATAC reads (cutadapt v1.3 -a CTGTCTCTTATACACATCT -q 30 –minimum-length 36 –paired-output)</p></li>
+<li><p><strong>Alignment</strong>: Trimmed reads were aligned to the mm10 genome (BOWTIE2 v2.1.0 -t -X2000 –no-mixed –no-discordant)</p></li>
+<li><p><strong>Deduplication</strong>: Redundant reads were removed (picard MarkDuplicates)</p></li>
+<li><p><strong>Fragment Adjustment</strong>: Fragment ends were offset by 4nt towards the center of each fragment</p></li>
+<li><p><strong>Peak Calling</strong>: Peaks were called with HOMER (findPeaks -region -size 500 -minDist 50 -o auto -tbp 0) using sub-nucleosomal (&lt;100bp) fragments, and overlapping peaks from the 2 replicates were merged (BEDTOOLS merge) to yield a peak set for each cell type</p></li>
+<li><p><strong>Visualization Track Generation</strong>:</p>
+<ul class="simple">
+<li><p>Visualization tracks were generated by counting genome-wide coverage of all fragments (BEDTOOLS v2.15.0 genomeCoverageBed -bg), scaling to 10M total alignments (custom perl script), and converting to bigWig format (UCSC wigToBigWig)</p></li>
+<li><p>Visualization tracks were also generated by counting genome-wide coverage of sub-nucleosomal (&lt;100bp) fragments (BEDTOOLS v2.15.0 genomeCoverageBed -bg), scaling to 10M total alignments (custom perl script), and converting to bigWig format (UCS</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/atac"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../download/download.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bulk downloading kriegstein single-cell data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../c_and_r/cr.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Jin Lab Cut&amp;Run Analysis Guideline</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-protocol">Experimental Protocol</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atac-quick-qc">ATAC Quick QC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-pepatac">Running PEPATAC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sample-csv">1. Create sample.csv</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-looper-config-file-xxx-yaml">2. Create looper config file (XXX.yaml)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-genome-setup">3. Reference Genome Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-pipeline">4. Run Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-chart">Resources Chart</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-analytical-pipelines">Alternative Analytical Pipelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-pipeline">ENCODE Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pepatac-singularity-approach">PEPATAC Singularity Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qc-results-tables">QC Results Tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-batch-results">First Batch Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-batch-results">Second Batch Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-singularity-command-example">Manual Singularity Command Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-organization-commands">File Organization Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling-manual-bypass">Error Handling / Manual Bypass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffbind-analysis">DiffBind Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-pipeline">Manual Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-setup">Conda Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software-installation">Software Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#known-dependency-issues">Known Dependency Issues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-summary">Processing Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atac-seq-processing-steps">ATAC-seq Processing Steps:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Single Cell Cell-Ranger Guideline &#8212; My sample book</title>
+    <title>Demultiplexing Script (demulti.sh) &#8212; My sample book</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/10x_analysis/cellranger_singlecell';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/demultiplexing/demulti';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Single Cell Cluster Seurat Guide" href="single_cell_cluster_seurat.html" />
-    <link rel="prev" title="ATAC Cell-Ranger Guideline" href="cellranger_atac.html" />
+    <link rel="next" title="Scripps Research File Storage Systems Guide" href="../storage/file_storage.html" />
+    <link rel="prev" title="Jin Lab Cut&amp;Run Analysis Guideline" href="../c_and_r/cr.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -163,11 +163,11 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">10x Analysis</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="cellranger_atac.html">Cell Ranger ATAC</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cell Ranger single-cell</a></li>
-<li class="toctree-l1"><a class="reference internal" href="single_cell_cluster_seurat.html">Seurat clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">10x Analysis Cheatsheet</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_atac.html">Cell Ranger ATAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_singlecell.html">Cell Ranger single-cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/single_cell_cluster_seurat.html">Seurat clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cheatsheet.html">10x Analysis Cheatsheet</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">HPC Guides</span></p>
 <ul class="nav bd-sidenav">
@@ -202,8 +202,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../c_and_r/cr.html">C &amp; R Analysis Guide</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Demultiplexing</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../demultiplexing/demulti.html">Demultiplexing Script</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Demultiplexing Script</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Storage System</span></p>
 <ul class="nav bd-sidenav">
@@ -325,7 +325,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/10x_analysis/cellranger_singlecell.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/demultiplexing/demulti.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -355,7 +355,7 @@
       
       
       
-      <li><a href="../../_sources/content/10x_analysis/cellranger_singlecell.md" target="_blank"
+      <li><a href="../../_sources/content/demultiplexing/demulti.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -431,7 +431,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Single Cell Cell-Ranger Guideline</h1>
+    <h1>Demultiplexing Script (demulti.sh)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,19 +441,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-start">Before Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-illumina-run-and-data-transfer">Step 1: Illumina Run and Data Transfer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-prepare-for-cellranger">Step 2: Prepare for Cellranger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#samplesheet-csv">1. Samplesheet.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-csv">2. Libraries.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#featureref-csv-if-needed">3. Featureref.csv (if needed)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upload-files-to-hpc">Upload Files to HPC</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-start-cellranger">Step 3: Start Cellranger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-template">Script Template</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-parameters">Script Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bcl2fastq-parameters">bcl2fastq Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-instructions">Usage Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
             </nav>
         </div>
@@ -465,120 +456,120 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="single-cell-cell-ranger-guideline">
-<h1>Single Cell Cell-Ranger Guideline<a class="headerlink" href="#single-cell-cell-ranger-guideline" title="Link to this heading">#</a></h1>
-<section id="before-start">
-<h2>Before Start<a class="headerlink" href="#before-start" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Read about the cellranger software <a class="reference external" href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger">here</a></p></li>
-<li><p>Fill in this <strong><a class="reference external" href="https://docs.google.com/spreadsheets/d/1O5EHXKMcctdhHC0H_TK7xsp6DezOLKlIYYGQL5jGUZY/edit?gid=568034138#gid=568034138">NGS</a></strong> sheet ~10x Tab to keep track of the barcodes and reads</p></li>
-</ul>
-</section>
-<section id="step-1-illumina-run-and-data-transfer">
-<h2>Step 1: Illumina Run and Data Transfer<a class="headerlink" href="#step-1-illumina-run-and-data-transfer" title="Link to this heading">#</a></h2>
-<p>Same as the Miseq or iSeq runs (see NGS indel analysis), transfer the data using either the BaseSpace account or a hard drive. Note please save this in appropriate folders located under:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">group</span><span class="o">/</span><span class="n">jin</span><span class="o">/</span><span class="n">sequencing</span>
-</pre></div>
-</div>
-<p><strong>Xinhe’s basespace account:</strong></p>
-<ul class="simple">
-<li><p>Email: <a class="reference external" href="mailto:xzheng&#37;&#52;&#48;scripps&#46;edu">xzheng<span>&#64;</span>scripps<span>&#46;</span>edu</a></p></li>
-<li><p>Password: Jinlab_xz2022</p></li>
-</ul>
-</section>
-<section id="step-2-prepare-for-cellranger">
-<h2>Step 2: Prepare for Cellranger<a class="headerlink" href="#step-2-prepare-for-cellranger" title="Link to this heading">#</a></h2>
-<p>Download all 3 .csv files from <code class="docutils literal notranslate"><span class="pre">Dropbox/Jin</span> <span class="pre">Lab</span> <span class="pre">Internal/10x</span> <span class="pre">README/10xsamplesheet/templates</span></code></p>
-<section id="samplesheet-csv">
-<h3>1. Samplesheet.csv<a class="headerlink" href="#samplesheet-csv" title="Link to this heading">#</a></h3>
-<p>You will need a samplesheet.csv for the sample index.</p>
-<p><strong>Please update:</strong></p>
-<ul class="simple">
-<li><p><strong>Lane</strong>: leave as * if all lanes are used</p></li>
-<li><p><strong>Sample</strong>: name of this library, such as 221209XZ_PHPeB. You will need to use this name in future analysis, so choose wisely</p></li>
-<li><p><strong>Index</strong>: the barcode you used. Follow the NGS sheet notes</p></li>
-</ul>
-<p>Check <a class="reference external" href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/mkfastq">this page</a> for any questions.</p>
-</section>
-<section id="libraries-csv">
-<h3>2. Libraries.csv<a class="headerlink" href="#libraries-csv" title="Link to this heading">#</a></h3>
-<p>You will need a libraries.csv to provide all the info about your libraries:</p>
-<p><strong>Please update:</strong></p>
-<ul class="simple">
-<li><p><strong>Fastqs</strong>: where the mkfastq output path is. Note you need a full path here</p></li>
-<li><p><strong>Sample</strong>: name of this library, such as 221209XZ_PHPeB. You will need to use this name in future analysis, so choose wisely</p></li>
-<li><p><strong>Library type</strong>: the type of the libraries</p></li>
-</ul>
-<p>Check <a class="reference external" href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/count">this page</a> for questions.</p>
-</section>
-<section id="featureref-csv-if-needed">
-<h3>3. Featureref.csv (if needed)<a class="headerlink" href="#featureref-csv-if-needed" title="Link to this heading">#</a></h3>
-<p>If you have feature barcode detection: you will need a featureref.csv file to update all <strong>gRNA</strong> you have in the library. Check the barcode pattern (column D) matches your gRNA backbone!</p>
-<p><strong>Please update</strong> the columns A B E G and H.</p>
-<p>Check <a class="reference external" href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/feature-bc-analysis">this page</a> for questions.</p>
-</section>
-<section id="upload-files-to-hpc">
-<h3>Upload Files to HPC<a class="headerlink" href="#upload-files-to-hpc" title="Link to this heading">#</a></h3>
-<p>Upload these in your HPC folder using rsync. Save in your own ‘10x_sheet’ subfolder to keep it organized.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avH<span class="w"> </span>/location_of_files<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/10xanalysis/xx
-</pre></div>
-</div>
-<p><strong>Xin’s note:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rsync<span class="w"> </span>-avH<span class="w"> </span>221209cellranger.sh<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/10xanalysis/221209
-rsync<span class="w"> </span>-avH<span class="w"> </span>221209libraries.csv<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/10xanalysis/221209
-rsync<span class="w"> </span>-avH<span class="w"> </span>221209samplesheet.csv<span class="w"> </span>-e<span class="w"> </span>ssh<span class="w"> </span>xinjin@login00.scripps.edu:/gpfs/group/jin/xin/10xanalysis/221209
-</pre></div>
-</div>
-</section>
-</section>
-<section id="step-3-start-cellranger">
-<h2>Step 3: Start Cellranger<a class="headerlink" href="#step-3-start-cellranger" title="Link to this heading">#</a></h2>
-<p>This is the step when you take the sequencer raw data (BCL) to convert to fastq files for each library.</p>
-<p>Edit the below script and update the highlighted parts. You can find this template in Dropbox folder too. Run using sbatch.</p>
-<p><strong>Notes:</strong></p>
-<ul class="simple">
-<li><p>Feel free to separate them into 2 scripts (mkfastq first, then count). It is easier to keep track.</p></li>
-<li><p><strong>IMPORTANT</strong> - if you have multiple channels/samples, run one script for each sample! (Or run mkfastq together and count separately with different sample sheets). This is not batch processing script yet (someone please set it up and share with the lab).</p></li>
-</ul>
-<section id="script-template">
-<h3>Script Template<a class="headerlink" href="#script-template" title="Link to this heading">#</a></h3>
+  <section class="tex2jax_ignore mathjax_ignore" id="demultiplexing-script-demulti-sh">
+<h1>Demultiplexing Script (<a class="reference external" href="http://demulti.sh">demulti.sh</a>)<a class="headerlink" href="#demultiplexing-script-demulti-sh" title="Link to this heading">#</a></h1>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --mem=64gb</span>
+<span class="c1">#SBATCH --mem=32gb</span>
 <span class="c1">#SBATCH --nodes=1</span>
 <span class="c1">#SBATCH --cpus-per-task=8</span>
-<span class="c1">#SBATCH --time=24:00:00</span>
-<span class="c1">#SBATCH --partition=highmem</span>
+<span class="c1">#SBATCH --time=3:00:00</span>
 
-<span class="c1">## Running cellranger analysis of 10X data</span>
+<span class="c1">## Running cellranger analysis of 10X data WITH hashtag libraries</span>
 <span class="c1">## NB: use different script for cDNA only libraries</span>
 <span class="c1">## Configured to work with Slurm</span>
 
-module<span class="w"> </span>load<span class="w"> </span>cellranger
+<span class="nb">cd</span><span class="w"> </span>/gpfs/group/jin/Sequencing/miseq/220914_M01440_0906_000000000-GDB22
 
-<span class="nv">ID</span><span class="o">=</span><span class="s2">&quot;align221211&quot;</span>
-<span class="nv">SAMPLESHEETPATH</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/xin/10xanalysis/221209/221209samplesheet.csv&quot;</span>
-<span class="nv">BCLPATH</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/Sequencing/nextseq/221209_NB501004_0429_AH72THBGX5/Data/Intensities/BaseCalls&quot;</span>
+mkdir<span class="w"> </span>fastq_files
 
-mkdir<span class="w"> </span>221209mkfastq
-<span class="nv">OUTPUTPATH</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/xin/10xanalysis/221209/221209mkfastq/outs/&quot;</span>
+module<span class="w"> </span>load<span class="w"> </span>bcl2fastq
 
-cellranger<span class="w"> </span>mkfastq<span class="w"> </span>--id<span class="o">=</span><span class="nv">$ID</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                     </span>--run<span class="o">=</span><span class="nv">$BCLPATH</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                     </span>--samplesheet<span class="o">=</span><span class="nv">$SAMPLESHEETPATH</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                     </span>--output-dir<span class="o">=</span><span class="nv">$OUTPUTPATH</span>
+bcl2fastq<span class="w"> </span>-p<span class="w"> </span><span class="m">12</span><span class="w"> </span>--barcode-mismatches<span class="w"> </span><span class="m">1</span><span class="w"> </span>--output-dir<span class="w"> </span>./fastq_files<span class="w"> </span>--no-lane-splitting
 
-<span class="nv">LIBRARIESPATH</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/xin/10xanalysis/221209/221209libraries.csv&quot;</span>
-<span class="nv">FEATUREREFPATH</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/xin/10xanalysis/221209/221209featureref.csv&quot;</span>
-<span class="nv">TRANSCRIPTOMEDIR</span><span class="o">=</span><span class="s2">&quot;/gpfs/group/jin/ref_genomes/mm10/refdata-gex-mm10-2020-A&quot;</span>
+<span class="c1">#tar -xvf 220413_A01255_0130_AH7TC3DRX2.tar</span>
 
-cellranger<span class="w"> </span>count<span class="w"> </span>--id<span class="o">=</span><span class="nv">$ID</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                        </span>--transcriptome<span class="o">=</span><span class="nv">$TRANSCRIPTOMEDIR</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                        </span>--libraries<span class="o">=</span><span class="nv">$LIBRARIESPATH</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                        </span>--feature-ref<span class="o">=</span><span class="nv">$FEATUREREFPATH</span><span class="w"> </span><span class="se">\</span>
-<span class="w">                        </span>--expect-cells<span class="o">=</span><span class="m">9000</span>
+<span class="c1">##LIBRARIESPATH=&quot;/gpfs/home/jaroslav/data/raw_fastq/libraries_combined_NS870.csv&quot;</span>
+<span class="c1">##FEATUREREFPATH=&quot;/gpfs/home/jaroslav/data/raw_fastq/featureReferenceHashes_combined_NS870.csv&quot;</span>
 </pre></div>
 </div>
+<section id="script-parameters">
+<h2>Script Parameters<a class="headerlink" href="#script-parameters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--mem</span></code></p></td>
+<td><p>32gb</p></td>
+<td><p>Memory allocation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--nodes</span></code></p></td>
+<td><p>1</p></td>
+<td><p>Number of nodes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cpus-per-task</span></code></p></td>
+<td><p>8</p></td>
+<td><p>CPUs per task</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--time</span></code></p></td>
+<td><p>3:00:00</p></td>
+<td><p>Maximum runtime</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
+<section id="bcl2fastq-parameters">
+<h2>bcl2fastq Parameters<a class="headerlink" href="#bcl2fastq-parameters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-p</span></code></p></td>
+<td><p>12</p></td>
+<td><p>Number of processing threads</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--barcode-mismatches</span></code></p></td>
+<td><p>1</p></td>
+<td><p>Allowed barcode mismatches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--output-dir</span></code></p></td>
+<td><p>./fastq_files</p></td>
+<td><p>Output directory</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--no-lane-splitting</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Combine lanes in output</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="usage-instructions">
+<h2>Usage Instructions<a class="headerlink" href="#usage-instructions" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Copy this script to your run folder</p></li>
+<li><p>Update the path in the <code class="docutils literal notranslate"><span class="pre">cd</span></code> command to match your run directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/gpfs/group/jin/Sequencing/miseq/<span class="o">[</span>YOUR_RUN_NAME<span class="o">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Submit the job:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>demulti.sh
+</pre></div>
+</div>
+</li>
+<li><p>Check job status:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>squeue<span class="w"> </span>-u<span class="w"> </span>your_username
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>This script is configured for 10X data with hashtag libraries</p></li>
+<li><p>The script creates a <code class="docutils literal notranslate"><span class="pre">fastq_files</span></code> directory for output</p></li>
+<li><p>Commented lines show examples of additional configurations for library and feature reference paths</p></li>
+</ul>
 </section>
 </section>
 
@@ -595,7 +586,7 @@ cellranger<span class="w"> </span>count<span class="w"> </span>--id<span class="
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/10x_analysis"
+            path: "./content/demultiplexing"
         },
         predefinedOutput: true
     }
@@ -613,20 +604,20 @@ cellranger<span class="w"> </span>count<span class="w"> </span>--id<span class="
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="cellranger_atac.html"
+       href="../c_and_r/cr.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ATAC Cell-Ranger Guideline</p>
+        <p class="prev-next-title">Jin Lab Cut&amp;Run Analysis Guideline</p>
       </div>
     </a>
     <a class="right-next"
-       href="single_cell_cluster_seurat.html"
+       href="../storage/file_storage.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Single Cell Cluster Seurat Guide</p>
+        <p class="prev-next-title">Scripps Research File Storage Systems Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -647,19 +638,10 @@ cellranger<span class="w"> </span>count<span class="w"> </span>--id<span class="
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-start">Before Start</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-illumina-run-and-data-transfer">Step 1: Illumina Run and Data Transfer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-prepare-for-cellranger">Step 2: Prepare for Cellranger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#samplesheet-csv">1. Samplesheet.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-csv">2. Libraries.csv</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#featureref-csv-if-needed">3. Featureref.csv (if needed)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upload-files-to-hpc">Upload Files to HPC</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-start-cellranger">Step 3: Start Cellranger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#script-template">Script Template</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#script-parameters">Script Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bcl2fastq-parameters">bcl2fastq Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-instructions">Usage Instructions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
   </nav></div>
 

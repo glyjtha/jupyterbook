@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Jin Lab Cut&amp;Run Analysis Guideline &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/c_and_r/cr';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Demultiplexing Script (demulti.sh)" href="../demultiplexing/demulti.html" />
+    <link rel="prev" title="Bulk ATAC-seq Analysis" href="../atac/atac.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jin Lab Dry Lab Handbook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">10x Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_atac.html">Cell Ranger ATAC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cellranger_singlecell.html">Cell Ranger single-cell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/single_cell_cluster_seurat.html">Seurat clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10x_analysis/cheatsheet.html">10x Analysis Cheatsheet</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">HPC Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/introduction.html">HPC Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/cluster.html">Cluster Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/request.html">Job Request</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/r.html">R Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/rstudioserver.html">RStudio Server</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">RNA Scope Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RNA_Scope_analysis/rna_scope.html">RNA Scope Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basespace Run Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../base_run/base_run.html">Basespace Run Creation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">BD Rhapsody Pipeline Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../BD/bd.html">BD Rhapsody Pipeline Setup</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Public Dataset Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../download/download.html">Kriegstein Data Download Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ATAC-seq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../atac/atac.html">ATAC-seq Analysis Guides</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cut and Run</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">C &amp; R Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Demultiplexing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../demultiplexing/demulti.html">Demultiplexing Script</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Storage System</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../storage/file_storage.html">File Storage Systems Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">NGS Indel </span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ngs/ngs_indel.html">NGS Indel Analysis Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipseq/pipseq.html">Pipseq Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Shareseq</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../shareseq/shareseq.html">Shareseq Pipeline Guide (Scripps HPC)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">STAR Alignment</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../star_alignment/star.html">STAR Alignment Guide</a></li>
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/c_and_r/cr.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/c_and_r/cr.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Jin Lab Cut&Run Analysis Guideline</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-option-1-illumina-run-and-data-transfer">Step 1 (Option 1): Illumina Run and Data Transfer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basespace-setup">BaseSpace Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novaseq-runs">NovaSeq Runs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-run-monitoring">Post-Run Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer-to-server">Data Transfer to Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-basespace-cli">Install BaseSpace CLI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#authenticate-with-basespace">Authenticate with BaseSpace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data">Download Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-option-2-novogene-data-transfer">Step 1 (Option 2): Novogene Data Transfer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-demultiplex-the-fastq-for-each-sample">Step 2: Demultiplex the FASTQ for Each Sample</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-samplesheet">Setup SampleSheet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-demultiplexing">Run Demultiplexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-setup">First Time Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unzip-files">Unzip Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-analysis-pipeline">Galaxy Analysis Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ere-sequences">ERE Sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-analysis-versions">Galaxy Analysis Versions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-v2-rerun">Galaxy v2 Rerun:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-v3-rerun">Galaxy v3 Rerun:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-pipeline">Alternative Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-notes-and-troubleshooting">Analysis Notes and Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-notes-240705">Quick Notes (240705):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control-observations">Quality Control Observations:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#protocol-comparison-questions">Protocol Comparison Questions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-plan">Experimental Plan:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-qc-of-positive-and-negative-control-samples">Step 3: QC of Positive and Negative Control Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-analysis">Step 4: Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-genome-for-homer">Install Required Genome for Homer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-download-stampy">Manual Download Stampy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-genome-prep">Build Genome Prep</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jin-lab-cut-run-analysis-guideline">
+<h1>Jin Lab Cut&amp;Run Analysis Guideline<a class="headerlink" href="#jin-lab-cut-run-analysis-guideline" title="Link to this heading">#</a></h1>
+<p><em>XJ 240705</em></p>
+<section id="step-1-option-1-illumina-run-and-data-transfer">
+<h2>Step 1 (Option 1): Illumina Run and Data Transfer<a class="headerlink" href="#step-1-option-1-illumina-run-and-data-transfer" title="Link to this heading">#</a></h2>
+<section id="basespace-setup">
+<h3>BaseSpace Setup<a class="headerlink" href="#basespace-setup" title="Link to this heading">#</a></h3>
+<p>For MiSeq, iSeq and NextSeq runs: please set up your own BaseSpace account prior to starting the Illumina run. Use your BaseSpace to log in to the machine, and ensure the data is synchronized with your BaseSpace.</p>
+<p><strong>Xinhe’s BaseSpace account</strong>:</p>
+<ul class="simple">
+<li><p>Email: <a class="reference external" href="mailto:xzheng&#37;&#52;&#48;scripps&#46;edu">xzheng<span>&#64;</span>scripps<span>&#46;</span>edu</a></p></li>
+<li><p>Password: Jinlab_xz2022</p></li>
+</ul>
+</section>
+<section id="novaseq-runs">
+<h3>NovaSeq Runs<a class="headerlink" href="#novaseq-runs" title="Link to this heading">#</a></h3>
+<p>In the unlikely event that you are running NovaSeq (typically for RNA-seq and complex libraries), BaseSpace will not work for the transfer due to the large size. CCBB will dispatch the data to you a few days after the run – contact Padma if you are waiting on this manual data dispatch.</p>
+</section>
+<section id="post-run-monitoring">
+<h3>Post-Run Monitoring<a class="headerlink" href="#post-run-monitoring" title="Link to this heading">#</a></h3>
+<p>You should be able to see the run statistics in real-time from your BaseSpace account.</p>
+<p>After the run completes, please pay attention to the cluster PF% and the reads number, which are two key parameters. Log them in the NGS sheet.</p>
+</section>
+<section id="data-transfer-to-server">
+<h3>Data Transfer to Server<a class="headerlink" href="#data-transfer-to-server" title="Link to this heading">#</a></h3>
+<p>To copy the data to the server, please log in to your HPC account: visit the {HPC Introduction}<code class="docutils literal notranslate"><span class="pre">../HPC/introduction.md</span></code> to set up the account and cc Xin in that email so that you are associated with the lab.</p>
+<p>Ideally request an interactive session first (adjust the highlighted content to your need):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>srun<span class="w"> </span>--cpus-per-task<span class="w"> </span><span class="m">8</span><span class="w"> </span>--mem-per-cpu<span class="w"> </span><span class="m">1500</span><span class="w"> </span>--time<span class="w"> </span><span class="m">3</span>:00:00<span class="w"> </span>--pty<span class="w"> </span>bash
+</pre></div>
+</div>
+<section id="install-basespace-cli">
+<h4>Install BaseSpace CLI<a class="headerlink" href="#install-basespace-cli" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try this first</span>
+/usr/local/bin/bs
+
+<span class="c1"># If this line does not work, install bs to your own directory:</span>
+wget<span class="w"> </span><span class="s2">&quot;https://launch.basespace.illumina.com/CLI/latest/amd64-linux/bs&quot;</span><span class="w"> </span>-O<span class="w"> </span><span class="nv">$HOME</span>/bs
+chmod<span class="w"> </span>u+x<span class="w"> </span><span class="nv">$HOME</span>/bs
+
+<span class="c1"># And you can use:</span>
+~/bs
+</pre></div>
+</div>
+</section>
+<section id="authenticate-with-basespace">
+<h4>Authenticate with BaseSpace<a class="headerlink" href="#authenticate-with-basespace" title="Link to this heading">#</a></h4>
+<p>If this is your first time, authenticate by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/bs<span class="w"> </span>auth
+<span class="c1"># (you may want to do bs auth --force if this is not the first time you have authenticated with basespace)</span>
+</pre></div>
+</div>
+<p>Follow the link and log in to your account on a web browser</p>
+</section>
+<section id="download-data">
+<h4>Download Data<a class="headerlink" href="#download-data" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># To get your Run ID:</span>
+~/bs<span class="w"> </span>list<span class="w"> </span>runs
+
+<span class="c1"># To download:</span>
+<span class="nb">cd</span><span class="w"> </span>/gpfs/group/jin/sequencing/iseq/
+mkdir<span class="w"> </span>221012_M01440_0913_000000000-DHDRP<span class="w">  </span><span class="c1"># generate a folder for your run name</span>
+~/bs<span class="w"> </span>download<span class="w"> </span>run<span class="w"> </span>-i<span class="w"> </span><span class="m">245759593</span><span class="w"> </span>-o<span class="w"> </span>./221012_M01440_0913_000000000-DHDRP
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-1-option-2-novogene-data-transfer">
+<h2>Step 1 (Option 2): Novogene Data Transfer<a class="headerlink" href="#step-1-option-2-novogene-data-transfer" title="Link to this heading">#</a></h2>
+<p>If you use Novogene, follow their download guideline.</p>
+</section>
+<section id="step-2-demultiplex-the-fastq-for-each-sample">
+<h2>Step 2: Demultiplex the FASTQ for Each Sample<a class="headerlink" href="#step-2-demultiplex-the-fastq-for-each-sample" title="Link to this heading">#</a></h2>
+<section id="setup-samplesheet">
+<h3>Setup SampleSheet<a class="headerlink" href="#setup-samplesheet" title="Link to this heading">#</a></h3>
+<p>Use the SampleSheet.csv to run demultiplex (samplesheet.csv see Dropbox/Protocol/Cut&amp;Run folder)</p>
+<p>You can find a vanilla barcode samplesheet in this dry lab folder if you don’t have it already. Remember to save it as ‘SampleSheet.csv’ and save it under the run folder.</p>
+</section>
+<section id="run-demultiplexing">
+<h3>Run Demultiplexing<a class="headerlink" href="#run-demultiplexing" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Update and copy the <code class="docutils literal notranslate"><span class="pre">demulti.sh</span></code> from the <code class="docutils literal notranslate"><span class="pre">miseq/220919</span></code> folder to your run folder</p></li>
+<li><p>Run the job by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>demulti.sh
+</pre></div>
+</div>
+</li>
+<li><p>You can check the status by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>squeue<span class="w"> </span>-u<span class="w"> </span>your_username
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="first-time-setup">
+<h3>First Time Setup<a class="headerlink" href="#first-time-setup" title="Link to this heading">#</a></h3>
+<p><strong>Note</strong>: If this is your first time you will need to edit your bashrc:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>~/.bashrc
+</pre></div>
+</div>
+<p>Add these lines:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">ulimit</span><span class="w"> </span>-n<span class="w"> </span><span class="m">4096</span>
+<span class="nb">umask</span><span class="w"> </span><span class="m">007</span>
+</pre></div>
+</div>
+<p>and re-login to your server account - the <code class="docutils literal notranslate"><span class="pre">ulimit</span></code> helps to run the bcl2fastq, and <code class="docutils literal notranslate"><span class="pre">umask</span></code> makes sure the folder you created can be accessed by other lab members.</p>
+</section>
+<section id="unzip-files">
+<h3>Unzip Files<a class="headerlink" href="#unzip-files" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gunzip<span class="w"> </span>*.gz
+</pre></div>
+</div>
+</section>
+</section>
+<section id="galaxy-analysis-pipeline">
+<h2>Galaxy Analysis Pipeline<a class="headerlink" href="#galaxy-analysis-pipeline" title="Link to this heading">#</a></h2>
+<p>For Cut&amp;Run data analysis, use the Galaxy:
+<a class="reference external" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html#step-4-peak-calling">https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html#step-4-peak-calling</a></p>
+<section id="ere-sequences">
+<h3>ERE Sequences<a class="headerlink" href="#ere-sequences" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Human ERE</strong>: 5′-GGTCAnnnTGACC-3′</p></li>
+<li><p><strong>Mouse lactoferrin sequence mouse ERE</strong>: 5’-GGTCAAGGTaACC-3’</p></li>
+</ul>
+</section>
+<section id="galaxy-analysis-versions">
+<h3>Galaxy Analysis Versions<a class="headerlink" href="#galaxy-analysis-versions" title="Link to this heading">#</a></h3>
+<section id="galaxy-v2-rerun">
+<h4>Galaxy v2 Rerun:<a class="headerlink" href="#galaxy-v2-rerun" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>mapQ: threshold set to 10 instead of 20</p></li>
+<li><p>Do not remove the duplicates - see more peaks. But concerns remain</p></li>
+</ul>
+</section>
+<section id="galaxy-v3-rerun">
+<h4>Galaxy v3 Rerun:<a class="headerlink" href="#galaxy-v3-rerun" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Add control IgG sample 1 as the control</p></li>
+</ul>
+</section>
+</section>
+<section id="alternative-pipeline">
+<h3>Alternative Pipeline<a class="headerlink" href="#alternative-pipeline" title="Link to this heading">#</a></h3>
+<p>Also tried: <a class="reference external" href="https://nf-co.re/cutandrun/dev/docs/usage/">https://nf-co.re/cutandrun/dev/docs/usage/</a></p>
+<p><strong>SEACR is more sensitive</strong>:
+<a class="reference external" href="https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/s13072-019-0287-4">https://epigeneticsandchromatin.biomedcentral.com/articles/10.1186/s13072-019-0287-4</a></p>
+</section>
+</section>
+<section id="analysis-notes-and-troubleshooting">
+<h2>Analysis Notes and Troubleshooting<a class="headerlink" href="#analysis-notes-and-troubleshooting" title="Link to this heading">#</a></h2>
+<section id="quick-notes-240705">
+<h3>Quick Notes (240705):<a class="headerlink" href="#quick-notes-240705" title="Link to this heading">#</a></h3>
+<p>Compared to H3K4, the Esr peaks (sample 3-5) seems to be all over the places? Not enough tight binding? Crosslink needed?</p>
+<p>Read Jessica paper more: Check protocol - she did not crosslink. Uses different nuclei numbers (but sorted GFP+). And 1h at 4C instead of 2h</p>
+<p>Ask Brian about crosslinking or not? Data diagnostics? Shorten incubation time?</p>
+</section>
+<section id="quality-control-observations">
+<h3>Quality Control Observations:<a class="headerlink" href="#quality-control-observations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Checked Jessica’s paper: Veh samples also have poor peaks? Compare with ours now</p></li>
+<li><p>Worth doing NeuN sort to enrich neurons? GFP too hard, save for snATAC</p></li>
+<li><p><strong>MarkDuplicate</strong>: S3 and S4 are high (11-13%), no need to seq deeper</p></li>
+<li><p><strong>Insert size histogram</strong>: a little broader than expected? No ab control is important? Shorten cut time - how long is it now? Library do not see 150 300 etc peaks</p></li>
+<li><p><strong>Fingerprint</strong>: no enrichment</p></li>
+</ul>
+<p>Reference: <a class="reference external" href="https://training.galaxyproject.org/training-material/topics/epigenetics/images/cut_and_run/cut_and_run_yield.png">https://training.galaxyproject.org/training-material/topics/epigenetics/images/cut_and_run/cut_and_run_yield.png</a></p>
+</section>
+<section id="protocol-comparison-questions">
+<h3>Protocol Comparison Questions:<a class="headerlink" href="#protocol-comparison-questions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Jiwen’s version nuclei douncing?</p></li>
+<li><p>How much primary ERα antibody (0.5 μg)? At 1μg/μL? Jessica 1:100.</p></li>
+<li><p>Is the 4°C really 4°C?</p></li>
+<li><p>Check PCR 14 cycles</p></li>
+<li><p>Would the NeuN FACS interfere with later Cut&amp;Run?</p></li>
+</ul>
+</section>
+<section id="experimental-plan">
+<h3>Experimental Plan:<a class="headerlink" href="#experimental-plan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ctx+E2 NeuN 500k - ERα</p></li>
+<li><p>Ctx+E2 NeuN 500k - IgG</p></li>
+<li><p>Hypo+E2 NeuN 500k - ERα</p></li>
+<li><p>Hypo+E2 NeuN 500k - light crosslinking - ERα</p></li>
+<li><p>Hypo+E2 NeuN 500k - IgG (?)</p></li>
+<li><p>Cell line - with and without crosslinking</p></li>
+</ul>
+</section>
+</section>
+<section id="step-3-qc-of-positive-and-negative-control-samples">
+<h2>Step 3: QC of Positive and Negative Control Samples<a class="headerlink" href="#step-3-qc-of-positive-and-negative-control-samples" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Copy the <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file to the <code class="docutils literal notranslate"><span class="pre">fastq_files</span></code> folder</p></li>
+<li><p>Update your sample name (<code class="docutils literal notranslate"><span class="pre">.fastq</span></code>) in the bash file</p></li>
+<li><p>Run it by: <code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">*.sh</span></code></p></li>
+<li><p>Copy the values from the terminal to the Excel sheet per sample</p></li>
+</ol>
+<p>You can check the specificity of your reaction/antibody this way as a QC. You expect the positive control (H3K4) to reach 100% and negative control (IgG) has less than 20% off targets.</p>
+</section>
+<section id="step-4-analysis">
+<h2>Step 4: Analysis<a class="headerlink" href="#step-4-analysis" title="Link to this heading">#</a></h2>
+<section id="environment-setup">
+<h3>Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h3>
+<p>Follow this page for installation (conda create):
+<a class="github reference external" href="https://github.com/mbassalbioinformatics/CnRAP">mbassalbioinformatics/CnRAP</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>cnrap_env
+<span class="c1"># Check the env creation is successful</span>
+
+conda<span class="w"> </span>activate<span class="w"> </span>cnrap_env
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>bioconda<span class="w"> </span>trimmomatic<span class="w"> </span>bwa<span class="w"> </span>picard<span class="w"> </span>samtools<span class="w"> </span>deeptools<span class="w"> </span>seacr<span class="w"> </span>homer<span class="w"> </span>meme<span class="w"> </span>ucsc-bedgraphtobigwig<span class="w"> </span>bioconductor-biocinstaller<span class="w"> </span>bioconductor-chipseeker
+</pre></div>
+</div>
+</section>
+<section id="install-required-genome-for-homer">
+<h3>Install Required Genome for Homer<a class="headerlink" href="#install-required-genome-for-homer" title="Link to this heading">#</a></h3>
+<p>Update the highlighted bit by your path:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>perl<span class="w"> </span>~/anaconda3/pkgs/homer-&lt;v#&gt;/share/homer/configureHomer.pl<span class="w"> </span>-install<span class="w"> </span>&lt;req_genome&gt;
+</pre></div>
+</div>
+<p><strong>Xin uses</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>perl<span class="w"> </span>~/miniconda3/pkgs/homer-4.11-pl5262h7d875b9_5/share/homer/configureHomer.pl<span class="w"> </span>-install<span class="w"> </span>mm10
+</pre></div>
+</div>
+</section>
+<section id="manual-download-stampy">
+<h3>Manual Download Stampy<a class="headerlink" href="#manual-download-stampy" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/uwb-linux/stampy.git
+<span class="nb">cd</span><span class="w"> </span>stampy
+make<span class="w"> </span>-j<span class="w"> </span><span class="m">8</span>
+</pre></div>
+</div>
+<p>Add the below path to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/gpfs/home/xinjin/apps/stampy
+</pre></div>
+</div>
+<p>Download kseq and gcc compile it</p>
+</section>
+<section id="build-genome-prep">
+<h3>Build Genome Prep<a class="headerlink" href="#build-genome-prep" title="Link to this heading">#</a></h3>
+<p><strong>Can use existing</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">group</span><span class="o">/</span><span class="n">jin</span><span class="o">/</span><span class="n">ref_genomes</span><span class="o">/</span><span class="n">mm10_piggybacinsert</span><span class="o">/</span><span class="n">bwa_index</span>
+</pre></div>
+</div>
+<p><strong>Or build new</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bwa<span class="w"> </span>index<span class="w"> </span>-p<span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;masked_genome_fasta&gt;.fa
+stampy.py<span class="w"> </span>--species<span class="o">=</span>&lt;species&gt;<span class="w"> </span>--assembly<span class="o">=</span>&lt;assembly_name&gt;<span class="w"> </span>-G<span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;masked_genome_fasta&gt;.fa
+stampy.py<span class="w"> </span>-g<span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>-H<span class="w"> </span>&lt;index_name&gt;
+</pre></div>
+</div>
+<p><strong>Example for human</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bwa<span class="w"> </span>index<span class="w"> </span>-p<span class="w"> </span>human_bwa_index_hg38_masked<span class="w"> </span>hg38_masked.fa
+stampy.py<span class="w"> </span>--species<span class="o">=</span>human<span class="w"> </span>--assembly<span class="o">=</span>hg38_masked<span class="w"> </span>-G<span class="w"> </span>human_bwa_index_hg38_masked<span class="w"> </span>./hg38_masked.fa
+stampy.py<span class="w"> </span>-g<span class="w"> </span>human_bwa_index_hg38_masked<span class="w"> </span>-H<span class="w"> </span>human_bwa_index_hg38_masked
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/c_and_r"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../atac/atac.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bulk ATAC-seq Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../demultiplexing/demulti.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Demultiplexing Script (demulti.sh)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-option-1-illumina-run-and-data-transfer">Step 1 (Option 1): Illumina Run and Data Transfer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basespace-setup">BaseSpace Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novaseq-runs">NovaSeq Runs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-run-monitoring">Post-Run Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-transfer-to-server">Data Transfer to Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#install-basespace-cli">Install BaseSpace CLI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#authenticate-with-basespace">Authenticate with BaseSpace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#download-data">Download Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-option-2-novogene-data-transfer">Step 1 (Option 2): Novogene Data Transfer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-demultiplex-the-fastq-for-each-sample">Step 2: Demultiplex the FASTQ for Each Sample</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-samplesheet">Setup SampleSheet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-demultiplexing">Run Demultiplexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-time-setup">First Time Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unzip-files">Unzip Files</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-analysis-pipeline">Galaxy Analysis Pipeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ere-sequences">ERE Sequences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-analysis-versions">Galaxy Analysis Versions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-v2-rerun">Galaxy v2 Rerun:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#galaxy-v3-rerun">Galaxy v3 Rerun:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-pipeline">Alternative Pipeline</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-notes-and-troubleshooting">Analysis Notes and Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-notes-240705">Quick Notes (240705):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-control-observations">Quality Control Observations:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#protocol-comparison-questions">Protocol Comparison Questions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-plan">Experimental Plan:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-qc-of-positive-and-negative-control-samples">Step 3: QC of Positive and Negative Control Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-analysis">Step 4: Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-genome-for-homer">Install Required Genome for Homer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-download-stampy">Manual Download Stampy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-genome-prep">Build Genome Prep</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
